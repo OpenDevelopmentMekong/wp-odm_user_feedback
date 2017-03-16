@@ -12,7 +12,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 	$only = 'a';
 	$trash_command = 'trashed';
 	$trash_display = 'Trash';
-	
+
 	if(isset($_REQUEST['only'])){
 		if($_REQUEST['only']=='trashed'){
 				$trash_command = 'undo_trash';
@@ -27,7 +27,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 		}
 	if(isset($_REQUEST['apply_button'])){
 		if($_REQUEST['choice'] != '-1'){
-			
+
 			$feed = $_REQUEST['feed'];
 			$ids = (is_array($feed)?implode($feed,','):$feed);
 			$field ='';
@@ -66,7 +66,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 		$action = $_REQUEST['action'];
 		$data = array();
 		$where = array('id'=>$rid);
-		
+
 		switch($action){
 			case 'trashed':
 				$data = array('trash'=>'1');
@@ -84,7 +84,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 				}
 			break;
 			}
-			
+
 		$update = $wpdb->update( TABLE_NAME, $data, $where);
 		if($update>=1 && $action=='trashed'){
 			?>
@@ -92,7 +92,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
             <?php
 			}
 		}
-	
+
 	$result_set = $wpdb->get_results("SELECT * FROM ".TABLE_NAME." WHERE trash = '".($only=='t'?1:0)."' ORDER BY id DESC");
 	$count = count($result_set);
 	$all = $wpdb->get_var("SELECT COUNT(id) FROM ".TABLE_NAME);
@@ -130,16 +130,16 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
             </tr>
         </thead>
         <tbody>
-            <?php foreach($result_set as $result_row){ 
+            <?php foreach($result_set as $result_row){
             $id = $result_row->id;
             $email = $result_row->email;
             $description = (strlen($result_row->description)>50?substr($result_row->description,0,50)."...":$result_row->description);
             $type = ucwords(str_replace('-',' ', $result_row->type));
-            $icon = PLUGIN_DIRECTORY."/style/images/".$icon_options[$result_row->type];
+            $icon = plugins_url("wp-odm_user_feedback")."/style/images/".$icon_options[$result_row->type];
             $file_upload = $result_row->file_upload;
 			$date = date_format(date_create($result_row->date_submitted),'M d, Y');
-			$time = date_format(date_create($result_row->date_submitted),'h:i:s A'); 
-			$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>'; 
+			$time = date_format(date_create($result_row->date_submitted),'h:i:s A');
+			$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
             $status = $status_options[$result_row->status];
 			$reverse_status = $reverse_status_options[$result_row->status];
             ?>
