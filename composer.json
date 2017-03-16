@@ -1,0 +1,11 @@
+{
+    "name": "opendevelopmentmekong/wp-odm_user_feedback",
+    "description": "This is the form to get the comment and feedback from the users.",
+    "authors": [
+        {
+            "name": "Huyeng Heng",
+            "email": "huyeng@opendevcam.net"
+        }
+    ],
+    "require": {}
+}
