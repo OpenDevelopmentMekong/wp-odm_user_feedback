@@ -105,8 +105,8 @@ require_once('layout/form.php');
           	$subject = 'Open Development Contact Form';
           	$message = "There is a feedback from user:".$email.": "."<br/>".
           	 "<strong>Message:</strong> "."<br/>".$desc;
-      			mail( $receiver , $subject, $message,  $headers);
-
+      			$send = mail( $receiver , $subject, $message,  $headers);
+            
             echo "Successful";
           	die();
           else:
@@ -141,15 +141,13 @@ require_once('layout/form.php');
         	die();
         }
 
-
         public function user_feedback_form_menu(){
-
-        	add_menu_page( 'User Feedback Options', 'User Feedback', "edit_others_posts",  "user_feedback_form", 'user_feedback_form_option_content', plugins_url("wp-odm_user_feedback").'/images/feedback-logo.png' );
+        	add_menu_page( 'User Feedback Options', 'User Feedback', "edit_others_posts",  "user_feedback_form", array(&$this, 'user_feedback_form_option_content'), plugins_url("wp-odm_user_feedback").'/images/feedback-logo.png' );
 
         }
 
         public function user_feedback_form_sub_menu(){
-        	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', 'user_feedback_form_option_content_detail' );
+        	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', array(&$this, 'user_feedback_form_option_content_detail'));
         }
 
         public function user_feedback_form_option_content(){

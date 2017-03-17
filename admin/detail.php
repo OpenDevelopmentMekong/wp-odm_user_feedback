@@ -24,7 +24,7 @@ $trash_display =($resultset->trash==1?'Undo Trash':'trash');
 
 
 if(isset($_REQUEST['reply'])){
-	
+
 	$id = $_REQUEST['id'];
 	$reply_desc = $_REQUEST['reply'];
 	$insert = $wpdb->insert(REPLYTABLE,
@@ -37,17 +37,17 @@ if(isset($_REQUEST['reply'])){
 	'%s'
 	)
 	);
-	
+
 	$headers = 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$headers .= 'From: '. 'info@opendevcam.net' . "\r\n";
 	$subject = 'ODC Contact Form Reply';
 	$message = $reply_desc;
 	$mail = mail( $email , $subject, $message,  $headers);
-	
+
     echo('<div id="message" class="updated below-h2"><p>'.($mail ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
-	
+
 	$update = $wpdb->update( TABLE_NAME, array('status'=>2), array('id'=>$id));
-	
+
 	}
 
 
@@ -63,13 +63,13 @@ $replyset = $wpdb->get_results('SELECT * FROM '.REPLYTABLE.' WHERE feedback_id =
 <div id="post-body-content">
 	<div class="postarea"><h3 style="border:none">Detail of: <?php echo($email); ?><div style="float:right">
     	<a href="admin.php?page=user_feedback_form&id=<?php echo($_REQUEST['id']); ?>&action=delete" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a>&nbsp;|&nbsp;
-        <a class="submitdelete" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo($trash_command.($only=='t'?'&only=trashed':'')) ?>"><?php echo($trash_display) ?></a></div>
+        <a class="submitdelete" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo $trash_command?>"><?php echo($trash_display) ?></a></div>
     </h3>
-        
+
         <div style="padding-left:10px;">
-        	
+
             <hr style="border-bottom:none; margin-bottom:0px;" />
-            
+
             <div style="float:left;width:100%">
             	<table width="100%">
             	<tr>
@@ -82,10 +82,12 @@ $replyset = $wpdb->get_results('SELECT * FROM '.REPLYTABLE.' WHERE feedback_id =
                 <tr>
                     <td colspan="2" style="height:70px; border:1px solid #dedede; padding:10px; vertical-align:top"><?php echo nl2br($desc); ?></td>
                 </tr>
+								<?php if ($file) : ?>
                 <tr>
                 	<td style="height:50px">File:</td>
-                    <td><strong><?php echo($file==''?'NO':'<a href="../wp-content/uploads/user_feedback_form/'.$file.'" target="_blank">'.$file.'</a>'); ?></strong></td>
+                    <td><strong><?php echo('<a href="../wp-content/uploads/user_feedback_form/'.$file.'" target="_blank">'.$file.'</a>'); ?></strong></td>
                 </tr>
+							<?php endif; ?>
             </table>
             </div>
             <div style="float:right; width:100%">
@@ -99,7 +101,7 @@ $replyset = $wpdb->get_results('SELECT * FROM '.REPLYTABLE.' WHERE feedback_id =
                        <tr><td style="background-color:#eaeaea; border-bottom:1px solid #ffffff; height:30px;">
                             <strong>
                                 <?php echo('&bull;&nbsp;&nbsp;&nbsp;'.nl2br($reply->description)); ?>
-                            </strong><div style="float:right"><?php 
+                            </strong><div style="float:right"><?php
 							$date = date_format(date_create($reply->reply_date),'M d, Y');
 							$time = date_format(date_create($reply->reply_date),'h:i:s A');
 							$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
@@ -117,7 +119,7 @@ $replyset = $wpdb->get_results('SELECT * FROM '.REPLYTABLE.' WHERE feedback_id =
             </table>
             </form>
             </div>
-        
+
         </div>
 	</div>
 </div>

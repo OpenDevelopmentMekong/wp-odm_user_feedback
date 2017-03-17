@@ -106,7 +106,6 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 					'submit-resource'=>'resource.png',
 				);
 	$reverse_status_options = array(0=>"read",1=>"unread",2=>"replied");
-	//echo('<img src="http://www.zonefivesoftware.com/sporttracks/images/plugin-naked.png" />');
 ?>
 <div class="wrap">
 <div id="icon-edit" class="icon32 icon32-posts-law_regulation"><br></div>
@@ -148,9 +147,9 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
                 <td scope="col" id="email">
                     <strong><a class="row-title"><?php echo($email) ?></a></strong>
                     <div class="row-actions">
-                        <span class="view"><a href="admin.php?page=feedback_detail&id=<?php echo($id); ?>" title="View this feedback" rel="permalink">View Feedback</a> | </span>
+                        <span class="view"><a href="admin.php?page=feedback_detail&id=<?php echo($id); ?>" title="View this feedback" rel="permalink">View</a> | </span>
                         <span class="trash"><a class="submitdelete" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo($trash_command.($only=='t'?'&only=trashed':'')) ?>"><?php echo($trash_display) ?></a></span>
-                        <br /><span class="trash"> | <a href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=delete<?php echo(($only=='t'?'&only=trashed':'')); ?>" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a></span>
+                        <span class="trash"> | <a href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=delete<?php echo(($only=='t'?'&only=trashed':'')); ?>" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a></span>
                     </div>
                 </td>
                 <td scope="col" id="type-of-feedback"><strong><img src="<?php echo($icon) ?>" style="height:15px; width:auto; margin-right:5px; float:left"/><?php echo($type) ?></strong></td>

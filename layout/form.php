@@ -277,8 +277,8 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
         success: function(data, textStatus, XMLHttpRequest){
           $("input:submit").removeAttr("disabled");
           if(data.trim() == "Successful"){
-            $("#get-involve").fadeOut();
-            $("#thanks-msg").show();
+            $("#get-involve").hide();
+            $("#thanks-msg").fadeIn();
             $("#user_feedback_form_container").children("h2").hide();
             $('#process-state-submit<?php echo $form_index; ?>').hide();
           }else {
