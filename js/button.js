@@ -9,7 +9,6 @@ jQuery(document).ready(function($) {
         $('#get-involve').show();
         $('span.needed').hide();
         $('#user_feedback_form-form').find("input[type=text], textarea").removeAttr( 'style' );
-        $('#view_upload_status').css({'display':'none'});
         $('div#process-state').css({'display':'none'});
         $('#user_feedback_form-form').find("input[type=text], textarea").val("");
         $("div#user_feedback_form_fix_left").fadeIn(500);
