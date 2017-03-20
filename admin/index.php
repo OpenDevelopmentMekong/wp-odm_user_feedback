@@ -53,7 +53,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 					$addition_cond = " AND ".$field." <> 2";
 				break;
 				}
-				$wpdb->query("UPDATE ".TABLE_NAME." SET ".$field." = ".$value." WHERE id IN (".$ids.") ".$addition_cond);
+				$wpdb->query("UPDATE ".TABLE_FEEDBACK." SET ".$field." = ".$value." WHERE id IN (".$ids.") ".$addition_cond);
 				if($update>=1){
 				?>
 	<div id="message" class="updated below-h2"><p>Process done</p></div>
@@ -76,7 +76,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 			break;
 			case 'delete':
 				$data = array('trash'=>'0');
-				$update = $wpdb->delete( TABLE_NAME, $where);
+				$update = $wpdb->delete( TABLE_FEEDBACK, $where);
 					if($update>=1){
 				?>
 						<div id="message" class="updated below-h2"><p>Feedback Deleted</p></div>
@@ -85,7 +85,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 			break;
 			}
 
-		$update = $wpdb->update( TABLE_NAME, $data, $where);
+		$update = $wpdb->update( TABLE_FEEDBACK, $data, $where);
 		if($update>=1 && $action=='trashed'){
 			?>
 <div id="message" class="updated below-h2"><p>Feedback Trashed <a href="admin.php?page=user_feedback_form&id=<?php echo($_REQUEST['id']); ?>&action=undo_trash">Undo</a></p></div>
@@ -93,10 +93,12 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 			}
 		}
 
-	$result_set = $wpdb->get_results("SELECT * FROM ".TABLE_NAME." WHERE trash = '".($only=='t'?1:0)."' ORDER BY id DESC");
+	$result_set = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".TABLE_FEEDBACK." WHERE trash = %d ORDER BY id DESC", ($only=='t'?1:0) ));
+
 	$count = count($result_set);
-	$all = $wpdb->get_var("SELECT COUNT(id) FROM ".TABLE_NAME);
-	$trash = $wpdb->get_var("SELECT COUNT(id) FROM ".TABLE_NAME." WHERE trash = '1'");
+	$all = $wpdb->get_var("SELECT COUNT(id) FROM ".TABLE_FEEDBACK);
+	
+	$trash = $wpdb->get_var("SELECT COUNT(id) FROM ".TABLE_FEEDBACK." WHERE trash = '1'");
 	$status_options= array(0=>"Unread",1=>"Read",2=>"Replied");
 	$icon_options = array(
 					'report-problem'=>'exclamation-mark.png',
@@ -116,10 +118,10 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 	<li class="publish"><a href="admin.php?page=user_feedback_form&only=trashed">Trashed <span class="count">(<?php echo($trash); ?>)</span></a></li>
 </ul>
 <form id="posts-filter" action="admin.php?page=user_feedback_form<?php echo(($only=='t'?'&only=trashed':'')); ?>" method="post">
-    <table class="wp-list-table widefat fixed posts" cellspacing="0">
+    <table class="feedback-list-table widefat fixed posts" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col" id="cb" class="column-cb check-column"><input type="checkbox"></th>
+                <th scope="col" id="cb" class="column-cb check-column"><input class="check-all" type="checkbox"></th>
                 <th scope="col" id="email">Email</th>
                 <th scope="col" id="type-of-feedback">Type of Feedback</th>
                 <th scope="col" id="description" class="column-title">Description</th>
@@ -135,15 +137,19 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
             $description = (strlen($result_row->description)>50?substr($result_row->description,0,50)."...":$result_row->description);
             $type = ucwords(str_replace('-',' ', $result_row->type));
             $icon = plugins_url("wp-odm_user_feedback")."/style/images/".$icon_options[$result_row->type];
-            $file_upload = $result_row->file_upload;
-			$date = date_format(date_create($result_row->date_submitted),'M d, Y');
-			$time = date_format(date_create($result_row->date_submitted),'h:i:s A');
-			$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
+
+
+	          $uploads_dir = wp_upload_dir();
+						$attached_link = $uploads_dir['url'].'/user_feedback_form/'.$result_row->file_upload;
+            $file_upload = "<a target='_blank' href='".$attached_link."'>$result_row->file_upload</a>";
+						$date = date_format(date_create($result_row->date_submitted),'M d, Y');
+						$time = date_format(date_create($result_row->date_submitted),'h:i:s A');
+						$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
             $status = $status_options[$result_row->status];
-			$reverse_status = $reverse_status_options[$result_row->status];
+						$reverse_status = $reverse_status_options[$result_row->status];
             ?>
             <tr>
-                <th scope="col" class="check-column"><input name="feed[]" type="checkbox" value="<?php echo($id); ?>"></th>
+                <td scope="col" class="check-column"><input name="feed[]" type="checkbox" value="<?php echo($id); ?>"></td>
                 <td scope="col" id="email">
                     <strong><a class="row-title"><?php echo($email) ?></a></strong>
                     <div class="row-actions">

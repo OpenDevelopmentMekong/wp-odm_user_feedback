@@ -1,5 +1,4 @@
 <?php
-// User Feedback Form
 require_once('layout/form.php');
 /**
  * Plugin Name: User Feedback Form
@@ -10,20 +9,16 @@ require_once('layout/form.php');
  * Forked from: userfeedback (By Mr. HENG Cham Roeun)
  * Author URI: http://www.opendevelopmentcambodia.net/
  */
-
  global $wpdb;
- define("TABLE_NAME" , $wpdb->prefix . 'user_feedback_form');
- register_activation_hook(__FILE__,'CreateFeedbackTable');
-
+ define("TABLE_FEEDBACK" , $wpdb->prefix . 'user_feedback_form');
+ define("TABLE_REPLY" , $wpdb->prefix . 'user_feedback_form_reply');
  if (!class_exists('Odm_User_Feedback_Plugin')) :
      class Odm_User_Feedback_Plugin
      {
- 				/**
- 				* Construct the plugin object.
- 				*/
  		    public function __construct()
  		    {
           add_action("init", array($this, 'add_script'));
+          add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_admin_style'));
           add_action("init", array($this, 'load_text_domain'));
           add_action("admin_menu", array($this, 'user_feedback_form_menu'));
           add_action("admin_menu", array($this, 'user_feedback_form_sub_menu'));
@@ -60,6 +55,11 @@ require_once('layout/form.php');
           wp_enqueue_script('user_feedback_form_buttonjs');
         	}
 
+        public function enqueue_custom_admin_style() {
+                wp_register_style( 'user_feedback_admin_css', plugins_url("wp-odm_user_feedback"). '/style/admin-style.css', false, '1.0.0' );
+                wp_enqueue_style( 'user_feedback_admin_css' );
+        }
+
         public function FeedbackForm(){?>
             <div id="user_feedback_form_fix_left">
                 <?php user_feedback_form_creation(array('is_popup_form'=>true, 'show_form'=>"all")); ?>
@@ -80,7 +80,7 @@ require_once('layout/form.php');
         	$desc = $request["question_text"];
         	$type = $request["question_type"];
         	$file_name = $request["file_name"];
-          $insert = $wpdb->insert(TABLE_NAME,
+          $insert = $wpdb->insert(TABLE_FEEDBACK,
             	array(
             		'email'=> $email_sender,
             		'description'=> $desc,
@@ -106,7 +106,7 @@ require_once('layout/form.php');
           	$message = "There is a feedback from user:".$email.": "."<br/>".
           	 "<strong>Message:</strong> "."<br/>".$desc;
       			$send = mail( $receiver , $subject, $message,  $headers);
-            
+
             echo "Successful";
           	die();
           else:
@@ -142,7 +142,8 @@ require_once('layout/form.php');
         }
 
         public function user_feedback_form_menu(){
-        	add_menu_page( 'User Feedback Options', 'User Feedback', "edit_others_posts",  "user_feedback_form", array(&$this, 'user_feedback_form_option_content'), plugins_url("wp-odm_user_feedback").'/images/feedback-logo.png' );
+        	add_menu_page( 'User Feedback Options', 'User Feedback', "edit_others_posts",  "user_feedback_form", array($this, 'user_feedback_form_option_content'), plugins_url("wp-odm_user_feedback").'/images/feedback-logo.png' );
+          $this->user_feedback_form_sub_menu();
 
         }
 
@@ -159,10 +160,7 @@ require_once('layout/form.php');
         }
 
         public function CreateFeedbackTable(){
-        	global $wpdb;
-        	$table_name = TABLE_NAME;
-
-        	$sql = "CREATE TABLE $table_name(
+          $sql = "CREATE TABLE IF NOT EXISTS". TABLE_FEEDBACK . "(
                   	id INT( 10 ) NOT NULL AUTO_INCREMENT ,
                   	email VARCHAR( 100 ) NOT NULL ,
                   	description TEXT NOT NULL ,
@@ -172,7 +170,15 @@ require_once('layout/form.php');
                   	status BOOLEAN NOT NULL DEFAULT  '0' ,
                   	trash BOOLEAN NOT NULL DEFAULT  '0' ,
                   	PRIMARY KEY( id )
-                    )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+                  )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+
+          $sql .= "CREATE TABLE IF NOT EXISTS ". TABLE_REPLY." (
+                    `id` int(10) NOT NULL AUTO_INCREMENT,
+                    `feedback_id` int(10) NOT NULL,
+                    `description` text NOT NULL,
+                    `reply_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    PRIMARY KEY (`id`)
+                  )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
         	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         	dbDelta( $sql );
@@ -222,4 +228,5 @@ require_once('layout/form.php');
 endif;
 
 $GLOBALS['userfeedback'] = new Odm_User_Feedback_Plugin();
+register_activation_hook(__FILE__, array($GLOBALS['userfeedback'] , 'CreateFeedbackTable' ) );
  ?>

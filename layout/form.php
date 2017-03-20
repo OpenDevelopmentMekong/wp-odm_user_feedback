@@ -102,10 +102,8 @@ function user_feedback_form_creation( $atts = array()){
     			    </div>
             </div>
     </div>
-
-<?php user_feedback_form_script( $atts['is_popup_form'], $form_index, $placeholder, $show_form); ?>
+    <?php user_feedback_form_script( $atts['is_popup_form'], $form_index, $placeholder, $show_form); ?>
 <?php } //end function ?>
-
 <?php
 function user_feedback_form_script( $is_popup_form = true, $form_index = null, $placeholder=null, $show_form=null){
  ?>
