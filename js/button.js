@@ -1,4 +1,7 @@
 jQuery(document).ready(function($) {
+  var feedback_position = $(".wrap-feedback_fix_left").offset().top + $(".wrap-feedback_fix_left").innerHeight() - $(".show-feedbackbuttom").innerHeight() +"px";
+      $('.show-feedbackbuttom').css('top', feedback_position);
+
     $("a#user_feedback_form").click(function(e) {
         $("div#wrap-feedback").after('<div id="overlay-div"></div>');
         $("div#overlay-div").after('<div id="loading-form"></div>');
@@ -14,5 +17,16 @@ jQuery(document).ready(function($) {
         $("div#user_feedback_form_fix_left").fadeIn(500);
         $("div#user_feedback_form_fix_left form").fadeIn(500);
     });
+    $('.hide-feedbackbuttom').click(function(){
+      $(".wrap-feedback_fix_left").hide("slide", { direction: "left" }, 400);
+      $('.show-feedbackbuttom').show("slide", { direction: "left" }, 700);
+    });
+    $('.show-feedbackbuttom').click(function(){
+      $('.show-feedbackbuttom').hide("slide", { direction: "left" }, 400);
+        $(".wrap-feedback_fix_left").show("slide", { direction: "left" }, 700);
+    });
 
+    $(window).scroll(function () {
+       $('.show-feedbackbuttom').css('top', feedback_position);
+    });
 });

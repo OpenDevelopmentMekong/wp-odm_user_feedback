@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-16 18:05+0700\n"
-"PO-Revision-Date: 2017-03-16 18:05+0700\n"
+"POT-Creation-Date: 2017-03-24 18:03+0700\n"
+"PO-Revision-Date: 2017-03-24 18:03+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:54
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:51
 msgid "Contact us"
 msgstr ""
 
@@ -87,6 +87,6 @@ msgstr ""
 msgid "Thank you for taking the time to get in contact!"
 msgstr ""
 
-#: ../wp-odm_user_feedback.php:212
+#: ../wp-odm_user_feedback.php:223
 msgid "Unable to delete file!"
 msgstr ""
