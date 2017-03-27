@@ -52,7 +52,7 @@ require_once('layout/form.php');
             </div>
             <img class="hide-feedbackbuttom"src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
-          <img class="show-feedbackbuttom" src="http://cambodia.odm.web/wp-content/plugins/wp-odm_user_feedback/images/right-circular.png">
+          <img class="show-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/right-circular.png">
         <?php
         }
 
