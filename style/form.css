@@ -105,7 +105,7 @@ div#user_feedback_form_container ul li.ui-state-active:focus{
 	color:#F00;
 	}
 div#user_feedback_form_container ul li.ui-state-active a{
-
+	color: black;
 	}
 div#user_feedback_form_container ul li a{
 	display:block;
@@ -227,7 +227,6 @@ div.view_upload_status{
 	float: right;
   max-width: 240px;
   margin-right: 20px;
-	height:29px;
 	line-height:20px;
 	font-size: 13px;
 	position: relative;
@@ -302,4 +301,63 @@ div.error-upload{
 }
 .hide{
 	display: none;
+}
+
+	@media screen and (min-device-width: 320px) and (max-device-width: 480px) {
+		div#user_feedback_form_fix_left {
+    	width: 96%;
+    	max-height: 400px;
+    	margin: 20% auto;
+			padding: 0
+		}
+
+		div#user_feedback_form_container {
+		    padding: 0.7em;
+		}
+		#user_feedback_form_fix_left #wrapper {
+    	width: 100%;
+		}
+
+		.long-all, #get-involve {
+		    width: 100%;
+		}
+
+		div#user_feedback_form_container .tabs {
+		    width: 100%;
+		    margin-top: 0;
+		}
+		div#user_feedback_form_container ul {
+	    height: 33px;
+		}
+		div#user_feedback_form_container ul li a {
+	    padding-left: 1.5em;
+	    background-size: 14px;
+	    background-position-x: 4px;
+			font-weight: 500;
+		}
+		#user_feedback_form_container ul li{
+			height: 32px !important;
+			margin-bottom: 1px;
+		}
+		#user_feedback_form_container ul li.ui-state-active {
+			height: 32px !important;
+		}
+		div.tabs div.involve {
+		    width: 98%;
+		}
+		.involve-content {
+		  margin: .8em;
+    	width: 87%;
+		}
+		.involve-content p {
+	    font-size: 12px;
+		}
+		div#user_feedback_form_container div.tabs textarea {
+    	width: 96%;
+    	max-height: 120px;
+		}
+		div#user_feedback_form_container input.fake-text{
+			width: 62%;
+		}
+
 }
