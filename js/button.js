@@ -1,13 +1,10 @@
 jQuery(document).ready(function($) {
-  var feedback_position = $(".wrap-feedback_fix_left").offset().top + $(".wrap-feedback_fix_left").innerHeight() - $(".show-feedbackbuttom").innerHeight() +"px";
+  var feedback_position = $(".hide-feedbackbuttom").offset().top +"px";
       $('.show-feedbackbuttom').css('top', feedback_position);
 
     $("a#user_feedback_form").click(function(e) {
         $("div#wrap-feedback").after('<div id="overlay-div"></div>');
         $("div#overlay-div").after('<div id="loading-form"></div>');
-        var left_long_all = 0;
-        //left_long_all = parseInt($('div#long-all').css('left').replace('px',''));
-        //left_long_all += 719;
         $('#thanks-msg').hide();
         $('#get-involve').show();
         $('span.needed').hide();

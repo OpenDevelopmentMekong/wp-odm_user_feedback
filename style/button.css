@@ -41,15 +41,16 @@ a#user_feedback_form:hover{
 	color: #000;
 	}
 .hide-feedbackbuttom{
-	position: relative;
-	left: 15px;
-	bottom: -76px;
+  position: absolute;
+  left: 18px;
+  bottom: 0px;
 	cursor: pointer;
 }
 .show-feedbackbuttom{
 	position: fixed;
 	left: -4px;
 	z-index: 1005;
+	display: none;
 	cursor: pointer;
 }
 div#overlay-div{
