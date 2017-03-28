@@ -4,7 +4,7 @@ require_once('layout/form.php');
  * Plugin Name: User Feedback Form
  * Plugin URI: http://www.opendevelopmentcambodia.net/
  * Description: The plugin that let's user to have feedback to ODC
- * Version: 2.0.1
+ * Version: 2.1.0
  * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
  * Forked from: userfeedback (By Mr. HENG Cham Roeun)
  * Author URI: http://www.opendevelopmentcambodia.net/
@@ -46,9 +46,16 @@ require_once('layout/form.php');
 
         public function button_user_feedback_form(){
         ?>
-            <div id="wrap-feedback" class="wrap-feedback_fix_left"><a id="user_feedback_form"><?php _e('Contact us', 'wp-odm_user_feedback'); ?></a></div>
+          <div id="wrap-feedback" class="wrap-feedback_fix_left">
+            <div id="feedback-button" class="feedback-button">
+              <a id="user_feedback_form"><?php _e('Contact us', 'wp-odm_user_feedback'); ?></a>
+            </div>
+            <img class="hide-feedbackbuttom"src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
+          </div>
+          <img class="show-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/right-circular.png">
         <?php
-        	 }
+        }
+
         public function add_script(){
         	wp_enqueue_style("user_feedback_form_buttoncss", plugins_url("wp-odm_user_feedback")."/style/button.css");
         	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'));

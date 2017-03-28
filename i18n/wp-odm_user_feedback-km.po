@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-22 19:36+0700\n"
-"PO-Revision-Date: 2017-03-22 19:39+0700\n"
+"POT-Creation-Date: 2017-03-24 18:02+0700\n"
+"PO-Revision-Date: 2017-03-24 18:02+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -81,13 +81,17 @@ msgstr "ពណ៌នាគំនិតរបស់លោកអ្នកនៅទ
 
 #: ../layout/form.php:13
 msgid "Do you have suggestions on how "
-msgstr "តើលោកអ្នកមានសំណើរអ្វីដើម្បីកែលម្អ​"
+msgstr "តើលោកអ្នកមានសំណើរអ្វីដើម្បី"
+
+#: ../layout/form.php:13
+msgid "can be improved?"
+msgstr "ធ្វើការកែលម្អលើ​គេហទំព័ររបស់ខ្លួនដែររឺទេ?"
 
 #: ../layout/form.php:14
 msgid "Tell us about the resources you're sharing with us."
 msgstr "សូមប្រាប់យើងខ្ញុំអំពីឯកសារដែលលោកអ្នកចង់ចែករំលែក"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:49
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:51
 msgid "Contact us"
 msgstr "ទំនាក់ទំនងយើងខ្ញុំ"
 
@@ -173,7 +177,7 @@ msgstr "មិនអាចបញ្ចូនបាន សូមធ្វើក�
 msgid "Thank you for taking the time to get in contact!"
 msgstr "អរគុណសំរាប់ការចំនាយពេលក្នុងការចែករំលែកមកកាន់យើងខ្ញុំ!"
 
-#: ../wp-odm_user_feedback.php:216
+#: ../wp-odm_user_feedback.php:223
 msgid "Unable to delete file!"
 msgstr "មិនអាចលុបឯកសារបានទេ!"
 
