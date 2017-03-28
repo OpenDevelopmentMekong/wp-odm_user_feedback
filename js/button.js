@@ -1,7 +1,4 @@
 jQuery(document).ready(function($) {
-  var feedback_position = $(".hide-feedbackbuttom").offset().top +"px";
-      $('.show-feedbackbuttom').css('top', feedback_position);
-
     $("a#user_feedback_form").click(function(e) {
         $("div#wrap-feedback").after('<div id="overlay-div"></div>');
         $("div#overlay-div").after('<div id="loading-form"></div>');
@@ -23,7 +20,15 @@ jQuery(document).ready(function($) {
         $(".wrap-feedback_fix_left").show("slide", { direction: "left" }, 700);
     });
 
-    $(window).scroll(function () {
-       $('.show-feedbackbuttom').css('top', feedback_position);
-    });
+
+		if( $(".hide-feedbackbuttom").length  != 0){
+  		var feedback_position = $(".hide-feedbackbuttom").offset().top +"px";
+      $('.show-feedbackbuttom').css('top', feedback_position);
+
+			$(window).scroll(function () {
+	       $('.show-feedbackbuttom').css('top', feedback_position);
+	    });
+		}
+
+
 });
