@@ -16,9 +16,9 @@ div#wrap-feedback.wrap-feedback_fix_left{
 	background: -webkit-linear-gradient(top, #feccb1 0%,#fb955e 0%,#f17432 32%,#ea5507 90%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to bottom, #feccb1 0%,#fb955e 0%,#f17432 32%,#ea5507 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feccb1', endColorstr='#ea5507',GradientType=0 );
-	padding: 7px 3px;
+	padding: 0 4px 10px 0;
 	width: 25px;
-	height: 110px;
+	height: 115px;
 	}
 #feedback-button{
 	-moz-transform:rotate(270deg);
@@ -31,10 +31,9 @@ div#wrap-feedback.wrap-feedback_fix_left{
 }
 
 a#user_feedback_form{
-	padding: 0 0 0 10px;
-	text-align:center;
 	color:#fff;
 	width: 105px;
+  text-align: center;
 	display: inline-block;
 	}
 a#user_feedback_form:hover{
@@ -42,7 +41,7 @@ a#user_feedback_form:hover{
 	}
 .hide-feedbackbuttom{
   position: absolute;
-  left: 18px;
+  left: 15px;
   bottom: 0px;
 	cursor: pointer;
 }
@@ -72,3 +71,24 @@ div#loading-form{
 	z-index:10008;
 	background:url(images/window-loader.gif) center no-repeat;
 	}
+
+	@media screen and (min-device-width: 320px) and (max-device-width: 650px) {
+		#wrap-feedback.wrap-feedback_fix_left{
+			width: 20px!important;
+  		height: 90px!important;
+		}
+		.km #wrap-feedback.wrap-feedback_fix_left{
+  		height: 100px!important;
+		}
+		a#user_feedback_form{
+		  font-size: 11px;
+			padding: 0 0 0 15px;
+		}
+		.km a#user_feedback_form{
+			padding: 0 0 0 10px;
+		}
+		.hide-feedbackbuttom {
+			left: 10px;
+		}
+ 
+}

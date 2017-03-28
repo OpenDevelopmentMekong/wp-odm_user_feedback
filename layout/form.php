@@ -146,6 +146,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
 
     $('#choice li').click(function(e) {
       $("p#involve-desc").hide();
+      $(".hide").hide();
       var placeholder = <?php echo  json_encode($placeholder) ?>;
     	var li = $(this);
       var li_id = li.attr('id');
