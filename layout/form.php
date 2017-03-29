@@ -10,7 +10,7 @@ function user_feedback_form_creation( $atts = array()){
     $placeholder["ask-question"] = __("Ask us anything about the ", "wp-odm_user_feedback"). $org_name." ". __("website or  open data.", "wp-odm_user_feedback");
     $placeholder["report-problem"] = __("Tell us about what you have found.", "wp-odm_user_feedback");
     $placeholder["share-idea"] = __("Describe your idea here.", "wp-odm_user_feedback");
-    $placeholder["send-feedback"] = __("Do you have suggestions on how ".$org_name." can be improved?", "wp-odm_user_feedback");
+    $placeholder["send-feedback"] = __("Do you have suggestions on how ", "wp-odm_user_feedback").$org_name." ". __("can be improved?", "wp-odm_user_feedback");
     $placeholder["submit-resource"] = __("Tell us about the resources you're sharing with us.", "wp-odm_user_feedback");
 
     $show_form = isset($atts['show_form'])? $atts['show_form']: "all";
@@ -146,6 +146,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
 
     $('#choice li').click(function(e) {
       $("p#involve-desc").hide();
+      $(".hide").hide();
       var placeholder = <?php echo  json_encode($placeholder) ?>;
     	var li = $(this);
       var li_id = li.attr('id');

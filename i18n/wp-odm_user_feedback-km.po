@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-22 19:36+0700\n"
-"PO-Revision-Date: 2017-03-22 19:39+0700\n"
+"POT-Creation-Date: 2017-03-24 18:02+0700\n"
+"PO-Revision-Date: 2017-03-28 14:32+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -21,23 +21,23 @@ msgstr "លោកអ្នកមិនមានសិទ្ធិគ្រប់
 
 #: ../layout/form.php:4
 msgid "Do you have a question that "
-msgstr "តើលោកអ្នកមានសំនួរណាមួយដែល"
+msgstr "លោកអ្នកអាចសួរសំនួរ​ណាមួយមកកាន់ "
 
 #: ../layout/form.php:4
 msgid "can help answer? We will gladly help you."
-msgstr "អាចជួយឆ្លើយបាន? យើងខ្ញុំនឹងជួយលោកអ្នកដោយរីករាយ។"
+msgstr "យើងខ្ញុំ​នឹង​ឆ្លើយ​តប​​ដោយ​ក្តី​រីក​រាយ។"
 
 #: ../layout/form.php:5
 msgid "Have you found a technical problem or issue on the "
-msgstr "តើអ្នកបានរកឃើញបញ្ហាបច្ចេកទេសណាមួយនៅលើគេហទំព័រ"
+msgstr "តើអ្នកបានឃើញបញ្ហាបច្ចេកទេសណាមួយនៅលើគេហទំព័រ"
 
 #: ../layout/form.php:5
 msgid "website?"
-msgstr "?"
+msgstr "ដែរឬទេ?"
 
 #: ../layout/form.php:6
 msgid "Do you have a new idea that could help transform the "
-msgstr "បើលោកអ្នកមានគំនិតថ្មីដែលអាចកែប្រែ"
+msgstr "តើលោកអ្នកមានគំនិតថ្មីដែលអាចជួយដល់ការផ្លាស់ប្តូរលើគេហទំព័រ"
 
 #: ../layout/form.php:6
 msgid "website? We will be glad to hear it."
@@ -45,7 +45,7 @@ msgstr "ដែរឬទេ? យើងខ្ញុំរីករាយនឹង�
 
 #: ../layout/form.php:7
 msgid "Tell us how we're doing."
-msgstr "សូមប្រាប់យើងខ្ញុំអំពីការងារដែលអូឌីស៊ីកំពុងធ្វើ"
+msgstr "តើលោកអ្នកយល់យ៉ាងដូចម្តេចដែរចំពោះការងាររបស់អូឌីស៊ី?"
 
 #: ../layout/form.php:8
 msgid "Do you have resources that could help expand the "
@@ -53,14 +53,12 @@ msgstr "តើលោកអ្នកមានឯកសារដែលអាចជ
 
 #: ../layout/form.php:8
 msgid ""
-"website? We will review any map data, laws, articles, and documents that we do not yet have and see "
-"if we can implement them into our site. Please make sure the resources are in the public domain or "
-"fall under a <a class='a-normal' target='_blank' href='http://creativecommons.org/'>Creative "
-"Commons</a> license."
+"website? We will review any map data, laws, articles, and documents that we do not yet have and see if we can implement them "
+"into our site. Please make sure the resources are in the public domain or fall under a <a class='a-normal' target='_blank' "
+"href='http://creativecommons.org/'>Creative Commons</a> license."
 msgstr ""
-"តើលោកអ្នកមានឯកសារដែលអាចជួយពង្រីកគេហទំព័រអូឌីស៊ីដែរឬទេ? យើងខ្ញុំនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និង "
-"ឯកសារដែលពុំមាននៅលើគេហទំព័រនេះ ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ "
-"ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ <a class='a-normal' target='_blank' href='http://creativecommons.org/'>Creative "
+"ដែរ​ឬទេ​?​ យើងខ្ញុំ​នឹង​ធ្វើការ​ត្រួតពិនិត្យ​រាល់​ទិន្នន័យ​អំពី​ផែនទី​ ច្បាប់​ អត្ថបទ​ និង​ ឯកសារ​ដែល​ពុំ​មាននៅ​លើ​គេហទំព័រ​នេះ​ ហើយ​ពិចារណា​បោះផ្សាយ​ទិន្នន័យ​ទាំងនោះ​។​ សូម​មេត្តា​ផ្ញើ​តែ​"
+"ឯកសារ​ណា​ដែល​មាន​ជា​សាធារណៈ​ ឬ​ស្ថិត​នៅ​ក្រោម​អាជ្ញាប័ណ្ណ​ <a class='a-normal' target='_blank' href='http://creativecommons.org/'>Creative "
 "Commons</a>។"
 
 #: ../layout/form.php:10
@@ -73,7 +71,7 @@ msgstr "ឬទិន្នន័យបើកទូលាយ?"
 
 #: ../layout/form.php:11
 msgid "Tell us about what you have found."
-msgstr "សូមប្រាប់យើងខ្ញុំអំពីអ្វីដែលអ្នកបានស្វែងរកឃើញ"
+msgstr "សូមប្រាប់យើងខ្ញុំអំពីបញ្ហាដែលអ្នកបានឃើញ"
 
 #: ../layout/form.php:12
 msgid "Describe your idea here."
@@ -81,13 +79,17 @@ msgstr "ពណ៌នាគំនិតរបស់លោកអ្នកនៅទ
 
 #: ../layout/form.php:13
 msgid "Do you have suggestions on how "
-msgstr "តើលោកអ្នកមានសំណើរអ្វីដើម្បីកែលម្អ​"
+msgstr "តើលោកអ្នកមានសំណើរអ្វីខ្លះដើម្បីឱ្យ"
+
+#: ../layout/form.php:13
+msgid "can be improved?"
+msgstr "ធ្វើការកែលម្អ?"
 
 #: ../layout/form.php:14
 msgid "Tell us about the resources you're sharing with us."
 msgstr "សូមប្រាប់យើងខ្ញុំអំពីឯកសារដែលលោកអ្នកចង់ចែករំលែក"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:49
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:51
 msgid "Contact us"
 msgstr "ទំនាក់ទំនងយើងខ្ញុំ"
 
@@ -105,7 +107,7 @@ msgstr "ចូលរួមផ្តល់មតិ"
 
 #: ../layout/form.php:38
 msgid "Send Feedback"
-msgstr "ផ្តល់ពត៌មានមកវិញ"
+msgstr "ផ្តល់ព័ត៌មានមកវិញ"
 
 #: ../layout/form.php:39
 msgid "Submit Resources"
@@ -113,7 +115,7 @@ msgstr "ផ្ញើឯកសារ"
 
 #: ../layout/form.php:63
 msgid "Attach file (supported type: jpg, png, pdf, doc(x), xls(x), zip)."
-msgstr "ភ្ជាប់ឯកសារ(ប្រភេទឯកសារ៖ jpg, png, pdf, doc(x), xls(x), zip)"
+msgstr "ភ្ជាប់ឯកសារ (ប្រភេទ៖ jpg, png, pdf, doc(x), xls(x), zip)"
 
 #: ../layout/form.php:64
 msgid "Browse"
@@ -137,21 +139,19 @@ msgstr "មានបញ្ហា!"
 
 #: ../layout/form.php:78
 msgid "Your Email (Will not be published)"
-msgstr "អ៊ីមែលរបស់លោកអ្នក(នឹងមិនត្រូវបានបង្ហាញជាសាធារណៈឡើយ)"
+msgstr "អ៊ីមែលរបស់លោកអ្នក (នឹងមិនត្រូវបានបង្ហាញជាសាធារណៈឡើយ)"
 
 #: ../layout/form.php:81
 msgid "Disclaimer: "
-msgstr "កំណត់សម្គាល់៖"
+msgstr "កំណត់សម្គាល់៖ "
 
 #: ../layout/form.php:81
 msgid ""
-"will thoroughly review all submitted resources for integrity and relevancy before the resources are "
-"hosted. All hosted resources will be in the public domain, or licensed under Creative Commons. We "
-"thank you for your support."
+"will thoroughly review all submitted resources for integrity and relevancy before the resources are hosted. All hosted "
+"resources will be in the public domain, or licensed under Creative Commons. We thank you for your support."
 msgstr ""
-"នឹងធ្វើការត្រួតពិនិត្យរាល់ឯកសារដែលបានបញ្ជូនមកយ៉ាងហ្មត់ចត់ ដើម្បីកំណត់ភាពត្រឹមត្រូវ និងពាក់ព័ន្ធ មុនពេលធ្វើការបង្ហោះផ្សាយ។ "
-"រាល់ឯកសារដែលបានបង្ហោះផ្សាយនឹងជាឯកសារដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ Creative Commons។ "
-"យើងខ្ញុំសូមអគុណសំរាប់ការគាំទ្ររបស់លោកអ្នក។"
+"នឹង​ធ្វើការ​ត្រួតពិនិត្យ​រាល់​ឯកសារ​ដែល​បាន​បញ្ជូន​មក​យ៉ាង​ហ្មត់ចត់​ ដើម្បី​កំណត់​ភាព​ត្រឹមត្រូវ​ និង​ពាក់ព័ន្ធ​ មុន​ពេលធ្វើការ​បង្ហោះ​ផ្សាយ​។​ រាល់​ឯកសារ​ដែល​បាន​បង្ហោះ​ផ្សាយ​នឹង​ជា​ឯកសារ​ដែល​"
+"មាន​ជា​សាធារណៈ​ ឬ​ស្ថិត​នៅ​ក្រោម​អាជ្ញាប័ណ្ណ​ Creative​ Commons​។​ យើងខ្ញុំ​សូម​អគុណ​សំរាប់​ការ​គាំទ្រ​របស់​លោក​អ្នក​។​"
 
 #: ../layout/form.php:85
 msgid "Submit"
@@ -171,21 +171,20 @@ msgstr "មិនអាចបញ្ចូនបាន សូមធ្វើក�
 
 #: ../layout/form.php:99
 msgid "Thank you for taking the time to get in contact!"
-msgstr "អរគុណសំរាប់ការចំនាយពេលក្នុងការចែករំលែកមកកាន់យើងខ្ញុំ!"
+msgstr "សូម​អរគុណ​សំរាប់​ការ​ចំនាយ​ពេល​ក្នុង​ការ​ចែក​រំលែក​មក​កាន់​យើងខ្ញុំ!"
 
-#: ../wp-odm_user_feedback.php:216
+#: ../wp-odm_user_feedback.php:223
 msgid "Unable to delete file!"
 msgstr "មិនអាចលុបឯកសារបានទេ!"
 
 #~ msgid ""
-#~ "website? We will review any map data, laws, articles, and documents that we do not yet have and "
-#~ "see if we can implement them into our site. Please make sure the resources are in the public "
-#~ "domain or fall under a <a class='a-normal' href='http://creativecommons.org/'>Creative Commons</"
-#~ "a> license."
+#~ "website? We will review any map data, laws, articles, and documents that we do not yet have and see if we can implement "
+#~ "them into our site. Please make sure the resources are in the public domain or fall under a <a class='a-normal' "
+#~ "href='http://creativecommons.org/'>Creative Commons</a> license."
 #~ msgstr ""
-#~ "? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និងឯកសារ​ដែល​ពុំមាន​នៅលើគេហទំព័រនេះ "
-#~ "ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class='a-"
-#~ "normal' href='http://creativecommons.org/'>Creative Commons</a> license។"
+#~ "? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និងឯកសារ​ដែល​ពុំមាន​នៅលើគេហទំព័រនេះ ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ "
+#~ "សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class='a-normal' href='http://creativecommons.org/'>Creative "
+#~ "Commons</a> license។"
 
 #~ msgid "Close"
 #~ msgstr "បិទ"
@@ -200,15 +199,13 @@ msgstr "មិនអាចលុបឯកសារបានទេ!"
 #~ msgstr "ប្រាប់យើងអំពីការងារដែលអូឌីស៊ីកំពុងធ្វើ"
 
 #~ msgid ""
-#~ "website? We will review any map data, laws, articles, and documents that we do not yet have and "
-#~ "see if we can implement them into our site. Please make sure the resources are in the public "
-#~ "domain or fall under a <a class=\\'a-normal\\' href=\\'http://creativecommons.org/\\'>Creative "
-#~ "Commons</a> license."
+#~ "website? We will review any map data, laws, articles, and documents that we do not yet have and see if we can implement "
+#~ "them into our site. Please make sure the resources are in the public domain or fall under a <a class=\\'a-normal\\' href="
+#~ "\\'http://creativecommons.org/\\'>Creative Commons</a> license."
 #~ msgstr ""
 #~ "? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និង \"\n"
 #~ "\"ឯកសារដែល​ពុំមាននៅលើគេហទំព័រនេះ ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ \"\n"
-#~ "\"ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class=\\\\'a-normal\\\\' href=\\\\'http://creativecommons.org/\\"
-#~ "\\'>Creative"
+#~ "\"ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class=\\\\'a-normal\\\\' href=\\\\'http://creativecommons.org/\\\\'>Creative"
 
 #~ msgid "Tell us about the resources you\\'re sharing with us."
 #~ msgstr "ប្រាប់យើងអំពីឯកសារដែលលោកអ្នកចង់ចែករំលែក"
@@ -231,32 +228,27 @@ msgstr "មិនអាចលុបឯកសារបានទេ!"
 #~ msgid "Have you found a technical problem or issue on the ODC website?"
 #~ msgstr "តើអ្នកបានរកឃើញបញ្ហាបច្ចេកទេសណាមួយនៅលើគេហទំព័រអូឌីស៊ីដែរឬទេ?"
 
-#~ msgid ""
-#~ "Do you have a new idea that could help transform the ODC website? We will be glad to hear it."
+#~ msgid "Do you have a new idea that could help transform the ODC website? We will be glad to hear it."
 #~ msgstr "តើលោកអ្នកមានគំនិតថ្មីដែលអាចកែប្រែគេហទំព័រ ODC ដែរឬទេ? ពួកយើងរីករាយនឹងទទួលយក"
 
 #~ msgid "Do you have suggestions on how ODC can be improved?"
 #~ msgstr "តើលោកអ្នកមានសំណើរអ្វីដើម្បីកែលម្អគេហទំព័រអូឌីស៊ីដែរឬទែ?"
 
 #~ msgid ""
-#~ "Do you have resources that could help expand the ODC website? We will review any map data, laws, "
-#~ "articles, and documents that we do not yet have and see if we can implement them into our site. "
-#~ "Please make sure the resources are in the public domain or fall under a <a class=\\'a-normal\\' "
-#~ "href=\\'http://creativecommons.org/\\'>Creative Commons</a> license."
+#~ "Do you have resources that could help expand the ODC website? We will review any map data, laws, articles, and documents "
+#~ "that we do not yet have and see if we can implement them into our site. Please make sure the resources are in the public "
+#~ "domain or fall under a <a class=\\'a-normal\\' href=\\'http://creativecommons.org/\\'>Creative Commons</a> license."
 #~ msgstr ""
-#~ "តើលោកអ្នកមានឯកសារដែលអាចជួយពង្រីកគេហទំព័រអូឌីស៊ីដែរឬទេ? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និង "
-#~ "ឯកសារដែលពុំមាននៅលើគេហទំព័រនេះ ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ "
-#~ "ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class=\\'a-normal\\' href=\\'http://creativecommons.org/\\'>Creative "
-#~ "Commons</a> license"
+#~ "តើលោកអ្នកមានឯកសារដែលអាចជួយពង្រីកគេហទំព័រអូឌីស៊ីដែរឬទេ? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និង ឯកសារដែលពុំមាននៅលើគេហទំព័រនេះ "
+#~ "ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class=\\'a-normal\\' href=\\'http://"
+#~ "creativecommons.org/\\'>Creative Commons</a> license"
 
 #~ msgid ""
-#~ "Disclaimer: ODC will thoroughly review all submitted resources for integrity and relevancy "
-#~ "before the resources are hosted. All hosted resources will be in the public domain, or licensed "
-#~ "under Creative Commons. We thank you for your support."
+#~ "Disclaimer: ODC will thoroughly review all submitted resources for integrity and relevancy before the resources are hosted. "
+#~ "All hosted resources will be in the public domain, or licensed under Creative Commons. We thank you for your support."
 #~ msgstr ""
-#~ "កំណត់សម្គាល់: អង្គការអូឌីស៊ីនឹងធ្វើការត្រួតពិនិត្យរាល់ឯកសារដែលបានបញ្ជូនមកយ៉ាងហ្មត់ចត់ ដើម្បីកំណត់ភាពត្រឹមត្រូវ និងពាក់ព័ន្ធ "
-#~ "មុនពេលធ្វើការបង្ហោះផ្សាយ។ រាល់ឯកសារដែលបានបង្ហោះផ្សាយនឹងជាឯកសារដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ "
-#~ "Creative Commons។ យើងខ្ញុំអគុណសំរាប់ការគាំទ្ររបស់លោកអ្នក។"
+#~ "កំណត់សម្គាល់: អង្គការអូឌីស៊ីនឹងធ្វើការត្រួតពិនិត្យរាល់ឯកសារដែលបានបញ្ជូនមកយ៉ាងហ្មត់ចត់ ដើម្បីកំណត់ភាពត្រឹមត្រូវ និងពាក់ព័ន្ធ មុនពេលធ្វើការបង្ហោះផ្សាយ។ "
+#~ "រាល់ឯកសារដែលបានបង្ហោះផ្សាយនឹងជាឯកសារដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ Creative Commons។ យើងខ្ញុំអគុណសំរាប់ការគាំទ្ររបស់លោកអ្នក។"
 
 #~ msgid "Do you have a question that ODC can help answer? We'll gladly help you"
 #~ msgstr "តើលោកអ្នកមានសំនួរណាមួយ ដែលអូឌីស៊ី អាចជួយឆ្លើយបាន? ពួកយើងនឹងជួយលោកអ្នកដោយរីករាយ។"
@@ -268,12 +260,10 @@ msgstr "មិនអាចលុបឯកសារបានទេ!"
 #~ msgstr "តើលោកអ្នកមានគំនិតថ្មីដែលអាចកែប្រែគេហទំព័រ ODC ដែរឬទេ? ពួកយើងរីករាយនឹងទទួលយក"
 
 #~ msgid ""
-#~ "Do you have resources that could help expand the ODC website? We will review any map data, laws, "
-#~ "articles, and documents that we do not yet have and see if we can implement them into our site. "
-#~ "Please make sure the resources are in the public domain or fall under a <a class=\"a-normal\" "
-#~ "href=\"http://creativecommons.org/\">Creative Commons</a> license."
+#~ "Do you have resources that could help expand the ODC website? We will review any map data, laws, articles, and documents "
+#~ "that we do not yet have and see if we can implement them into our site. Please make sure the resources are in the public "
+#~ "domain or fall under a <a class=\"a-normal\" href=\"http://creativecommons.org/\">Creative Commons</a> license."
 #~ msgstr ""
-#~ "តើលោកអ្នកមានឯកសារដែលអាចជួយពង្រីកគេហទំព័រអូឌីស៊ីដែរឬទេ? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និង "
-#~ "ឯកសារដែលពុំមាននៅលើគេហទំព័រនេះ ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ "
-#~ "ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class=\"a-normal\" href=\"http://creativecommons.org/\">Creative Commons</"
-#~ "a license."
+#~ "តើលោកអ្នកមានឯកសារដែលអាចជួយពង្រីកគេហទំព័រអូឌីស៊ីដែរឬទេ? ពួកយើងនឹងធ្វើការត្រួតពិនិត្យរាល់ទិន្នន័យអំពីផែនទី ច្បាប់ អត្ថបទ និង ឯកសារដែលពុំមាននៅលើគេហទំព័រនេះ "
+#~ "ហើយពិចារណាបោះផ្សាយទិន្នន័យទាំងនោះ។ សូមមេត្តាផ្ញើតែឯកសារណាដែលមានជាសាធារណៈ ឬស្ថិតនៅក្រោមអាជ្ញាប័ណ្ណ  <a class=\"a-normal\" href=\"http://"
+#~ "creativecommons.org/\">Creative Commons</a license."
