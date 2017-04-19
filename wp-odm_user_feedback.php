@@ -9,15 +9,14 @@ require_once('layout/form.php');
  * Forked from: userfeedback (By Mr. HENG Cham Roeun)
  * Author URI: http://www.opendevelopmentcambodia.net/
  */
- global $wpdb;
- define("TABLE_FEEDBACK" , $wpdb->prefix . 'user_feedback_form');
- define("TABLE_REPLY" , $wpdb->prefix . 'user_feedback_form_reply');
+
  if (!class_exists('Odm_User_Feedback_Plugin')) :
      class Odm_User_Feedback_Plugin
      {
  		    public function __construct()
  		    {
           add_action("init", array($this, 'add_script'));
+          add_action('wpmu_new_blog', array($this, 'on_create_blog'));
           add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_admin_style'));
           add_action("init", array($this, 'load_text_domain'));
           add_action("admin_menu", array($this, 'user_feedback_form_menu'));
@@ -75,19 +74,20 @@ require_once('layout/form.php');
         }
 
         public function FeedbackSubmission(){
-        	global $wpdb;
+          global $wpdb;
+          $feedback_table = $wpdb->prefix . 'user_feedback_form';
           $uploads_dir = wp_upload_dir();
         	$request = $_REQUEST;
         	$insert = null;
         	$email_sender= $request["email"];
-          $receiver = get_settings('admin_email');
+          $receiver = get_option('admin_email');
         	if(empty($email_sender)){
-        		$email_sender = $receiver;
+        		$email_sender = "Anonymous user";
         	}
         	$desc = $request["question_text"];
         	$type = $request["question_type"];
         	$file_name = $request["file_name"];
-          $insert = $wpdb->insert(TABLE_FEEDBACK,
+          $insert = $wpdb->insert($feedback_table,
             	array(
             		'email'=> $email_sender,
             		'description'=> $desc,
@@ -149,9 +149,8 @@ require_once('layout/form.php');
         }
 
         public function user_feedback_form_menu(){
-        	add_menu_page( 'User Feedback Options', 'User Feedback', "edit_others_posts",  "user_feedback_form", array($this, 'user_feedback_form_option_content'), plugins_url("wp-odm_user_feedback").'/images/feedback-logo.png' );
+        	add_menu_page( 'User Feedback Options', 'User Feedback', "edit_others_posts",  "user_feedback_form", array($this, 'user_feedback_form_option_content'), plugins_url("wp-odm_user_feedback").'/images/feedback-logo.png', 15 );
           $this->user_feedback_form_sub_menu();
-
         }
 
         public function user_feedback_form_sub_menu(){
@@ -166,8 +165,34 @@ require_once('layout/form.php');
         	require_once("admin/detail.php");
         }
 
+        public function on_activate( $network_wide ) {
+            global $wpdb;
+            if ( is_multisite() && $network_wide ) {
+                // Get all blogs in the network and activate plugin on each one
+                $blog_ids = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
+                foreach ( $blog_ids as $blog_id ) {
+                    switch_to_blog( $blog_id );
+                    $this->CreateFeedbackTable();
+                    restore_current_blog();
+                }
+            } else {
+                $this->CreateFeedbackTable();
+            }
+        }
+
+        public function on_create_blog( $blog_id, $user_id, $domain, $path, $site_id, $meta ) {
+            if ( is_plugin_active_for_network( 'wp-odm_user_feedback/wp-odm_user_feedback.php' ) ) {
+                switch_to_blog( $blog_id );
+                $this->CreateFeedbackTable();
+                restore_current_blog();
+            }
+        }
+
         public function CreateFeedbackTable(){
-          $sql = "CREATE TABLE IF NOT EXISTS". TABLE_FEEDBACK . "(
+          global $wpdb;
+          $feedback_table = $wpdb->prefix . 'user_feedback_form';
+          $reply_feedback_table= $wpdb->prefix . 'user_feedback_form_reply';
+          $sql_feedback = "CREATE TABLE IF NOT EXISTS ". $feedback_table . "(
                   	id INT( 10 ) NOT NULL AUTO_INCREMENT ,
                   	email VARCHAR( 100 ) NOT NULL ,
                   	description TEXT NOT NULL ,
@@ -176,10 +201,10 @@ require_once('layout/form.php');
                   	date_submitted TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
                   	status BOOLEAN NOT NULL DEFAULT  '0' ,
                   	trash BOOLEAN NOT NULL DEFAULT  '0' ,
-                  	PRIMARY KEY( id )
+                  	PRIMARY KEY ( id )
                   )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
-          $sql .= "CREATE TABLE IF NOT EXISTS ". TABLE_REPLY." (
+          $sql_feedback .= "CREATE TABLE IF NOT EXISTS ". $reply_feedback_table ." (
                     `id` int(10) NOT NULL AUTO_INCREMENT,
                     `feedback_id` int(10) NOT NULL,
                     `description` text NOT NULL,
@@ -188,7 +213,7 @@ require_once('layout/form.php');
                   )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
         	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        	dbDelta( $sql );
+        	dbDelta( $sql_feedback );
         }
 
         public function generateNewFileName($directory_part, $original_name){
@@ -235,5 +260,6 @@ require_once('layout/form.php');
 endif;
 
 $GLOBALS['userfeedback'] = new Odm_User_Feedback_Plugin();
-register_activation_hook(__FILE__, array($GLOBALS['userfeedback'] , 'CreateFeedbackTable' ) );
+
+register_activation_hook(__FILE__, array($GLOBALS['userfeedback'], 'on_activate' ) );
  ?>

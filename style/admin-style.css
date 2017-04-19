@@ -9,6 +9,11 @@
 	padding-right: 1em;
 	width: 97%
 }
+.reply-feedback-container{
+	margin-top: 2em;
+	background: #f4f4f4;
+	border: 1px solid #ccc
+}
 .reply-feedback tr:nth-child(odd){
 	background: #eee;
 }
@@ -16,7 +21,7 @@
 	border-bottom:1px solid #ffffff;
 }
 .reply-feedback{
-	margin-top: 2em;
+	margin-top: 0;
 	background: #f4f4f4;
 	border: 1px solid #ccc
 }
