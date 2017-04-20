@@ -60,11 +60,13 @@ if(isset($_REQUEST['forwardto_email']) && !empty($_REQUEST['forwardto_email'])){
 		$message .= "<p><strong>Attached file:</strong><br/>". $file_upload. "</p>";
 	endif;
 
-	$mail = mail( $forwared_mail , $subject, $message,  $headers); 
-  echo('<div id="message" class="updated below-h2"><p>'.($mail ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
-		$update = $wpdb->update( $feedback_table, array('status'=>3), array('id'=>$id));
-
-}elseif(isset($insert) && ($insert==false)){
+	$sent = mail( $forwared_mail , $subject, $message,  $headers);
+	if(isset($sent)):
+  	echo('<div id="message" class="updated below-h2"><p>'.($sent ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
+	endif;
+	
+	$update = $wpdb->update( $feedback_table, array('status'=>3), array('id'=>$id));
+} elseif(isset($insert) && ($insert==false)){
 	echo('<div id="message" class="updated below-h2"><p>Can not forward.</p></div>');
 }
 

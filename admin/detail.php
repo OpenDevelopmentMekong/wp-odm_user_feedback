@@ -55,10 +55,12 @@ if(isset($_REQUEST['reply'])){
 	else:
 		$message = $reply_desc  . "\r\n\r\n".$date_submitted."\r\n"."Sent Message:\r\n".$desc;
 	endif;
-	$mail = mail( $email , $subject, $message,  $headers);
-    echo('<div id="message" class="updated below-h2"><p>'.($mail ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
-		$update = $wpdb->update( $feedback_table, array('status'=>2), array('id'=>$id));
 
+	/*$sent = mail( $email , $subject, $message,  $headers);
+	if(isset($sent)):
+  	echo('<div id="message" class="updated below-h2"><p>'.($sent ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
+	endif;*/
+	$update = $wpdb->update( $feedback_table, array('status'=>2), array('id'=>$id));
 }
 
 
