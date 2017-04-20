@@ -54,15 +54,21 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 					$value = '0';
 					$addition_cond = " AND ".$field." <> 2";
 				break;
+				case 'forwarded':
+					$field = 'status';
+					$value = '3';
+				break;
 				}
 				$wpdb->query("UPDATE ".$feedback_table." SET ".$field." = ".$value." WHERE id IN (".$ids.") ".$addition_cond);
-				if($update>=1){
-				?>
-	<div id="message" class="updated below-h2"><p>Process done</p></div>
-				<?php
-				}
+
+				if(isset($update) && ($update >=1)):
+					?>
+					<div id="message" class="updated below-h2"><p>Process done</p></div>
+					<?php
+				endif;
 		}
 	}
+
 	if(isset($_REQUEST['id']) && isset($_REQUEST['action'])){
 		$rid = $_REQUEST['id'];
 		$action = $_REQUEST['action'];
@@ -79,11 +85,11 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 			case 'delete':
 				$data = array('trash'=>'0');
 				$update = $wpdb->delete( $feedback_table, $where);
-					if($update>=1){
-				?>
-						<div id="message" class="updated below-h2"><p>Feedback Deleted</p></div>
-				<?php
-				}
+				if(isset($update) && ($update >=1)):
+					?>
+					<div id="message" class="updated below-h2"><p>Feedback Deleted</p></div>
+					<?php
+				endif;
 			break;
 			}
 
@@ -101,7 +107,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 	$all = $wpdb->get_var("SELECT COUNT(id) FROM ".$feedback_table);
 
 	$trash = $wpdb->get_var("SELECT COUNT(id) FROM ".$feedback_table." WHERE trash = '1'");
-	$status_options= array(0=>"Unread",1=>"Read",2=>"Replied");
+	$status_options= array(0=>"Unread", 1=>"Read", 2=>"Replied", 3=>"Forwarded");
 	$icon_options = array(
 					'report-problem'=>'exclamation-mark.png',
 					'ask-question'=>'question-mark.png',
@@ -109,7 +115,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 					'send-feedback'=>'texting-tooltip.png',
 					'submit-resource'=>'resource.png',
 				);
-	$reverse_status_options = array(0=>"read",1=>"unread",2=>"replied");
+	$reverse_status_options = array(0=>"read", 1=>"unread", 2=>"replied", 3=>"forwarded");
 ?>
 <div class="wrap">
 <div id="icon-edit" class="icon32 icon32-posts-law_regulation"><br></div>
@@ -130,10 +136,11 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
                 <th scope="col" id="attachment">Attachment</th>
                 <th scope="col" id="submitted-date">Submitted</th>
                 <th scope="col" id="status" class="column-date">Status</th>
+                <th scope="col" id="Forward" class="column-date">Forward</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach($result_set as $result_row){
+          <?php foreach($result_set as $result_row){
             $id = $result_row->id;
             $email = $result_row->email;
             $description = (strlen($result_row->description)>50?substr($result_row->description,0,50)."...":$result_row->description);
@@ -149,7 +156,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 						$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
             $status = $status_options[$result_row->status];
 						$reverse_status = $reverse_status_options[$result_row->status];
-            ?>
+          ?>
             <tr>
                 <td scope="col" class="check-column"><input name="feed[]" type="checkbox" value="<?php echo($id); ?>"></td>
                 <td scope="col" id="email">
@@ -164,7 +171,18 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
                 <td scope="col" id="description"><?php echo($description) ?></td>
                 <td scope="col" id="attachment"><?php echo($file_upload) ?></td>
                 <td scope="col" id="submitted-date"><?php echo($date_submitted) ?></td>
-                <td scope="col" id="status"><a href="admin.php?page=user_feedback_form&apply_button=1&choice=<?php echo($reverse_status.($only=='t'?'&only=trashed':'')); ?>&feed=<?php echo($id); ?>"><strong><?php echo($status) ?></strong></a></td>
+                <td scope="col" id="status">
+									<?php
+									if($status== "Replied"):
+										echo '<a href="admin.php?page=feedback_detail&id='.$id.'" title="View reply"><strong>'.$status.'</strong></a>';
+									elseif($status== "Forwarded"):
+										echo '<a href="admin.php?page=feedback_forward&id='.$id.'" title="View who has been forwarded to"><strong>'.$status.'</strong></a>';
+									else:
+										echo '<a href="admin.php?page=user_feedback_form&apply_button=1&choice='. $reverse_status . ($only=='t'?'&only=trashed':'').'&feed='.$id.'" title="Mark as '.$reverse_status.'"><strong>'.$status.'</strong></a>';
+									endif;
+									?>
+								</td>
+                <td scope="col" id="forward"><?php //if ($reverse_status !="replied" && $reverse_status !="forwarded"): ?><a class="button" href="admin.php?page=feedback_forward&id=<?php echo($id); ?>" title="Forward to" rel="permalink"><strong><?php echo "Forward" ?></strong></a><?php //endif; ?> </td>
             </tr>
             <?php } ?>
         </tbody>

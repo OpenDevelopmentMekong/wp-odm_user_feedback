@@ -25,6 +25,9 @@
 	background: #f4f4f4;
 	border: 1px solid #ccc
 }
+#forwardto{
+	border: 1px solid #ddd;
+}
 .small-font{
 	font-size: 12px;
 }

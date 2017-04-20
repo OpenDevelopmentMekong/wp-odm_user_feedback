@@ -4,7 +4,7 @@ require_once('layout/form.php');
  * Plugin Name: User Feedback Form
  * Plugin URI: http://www.opendevelopmentcambodia.net/
  * Description: The plugin that let's user to have feedback to ODC
- * Version: 2.1.1
+ * Version: 2.2.0
  * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
  * Forked from: userfeedback (By Mr. HENG Cham Roeun)
  * Author URI: http://www.opendevelopmentcambodia.net/
@@ -62,8 +62,8 @@ require_once('layout/form.php');
         	}
 
         public function enqueue_custom_admin_style() {
-                wp_register_style( 'user_feedback_admin_css', plugins_url("wp-odm_user_feedback"). '/style/admin-style.css', false, '1.0.0' );
-                wp_enqueue_style( 'user_feedback_admin_css' );
+            wp_register_style( 'user_feedback_admin_css', plugins_url("wp-odm_user_feedback"). '/style/admin-style.css', false, '1.0.0' );
+            wp_enqueue_style( 'user_feedback_admin_css' );
         }
 
         public function FeedbackForm(){?>
@@ -155,6 +155,8 @@ require_once('layout/form.php');
 
         public function user_feedback_form_sub_menu(){
         	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', array(&$this, 'user_feedback_form_option_content_detail'));
+
+          add_submenu_page( NULL, 'Forward Feedback To', 'Forward Feedback To ', "edit_others_posts", 'feedback_forward', array(&$this, 'user_feedback_form_forwardto'));
         }
 
         public function user_feedback_form_option_content(){
@@ -163,6 +165,9 @@ require_once('layout/form.php');
 
         public function user_feedback_form_option_content_detail(){
         	require_once("admin/detail.php");
+        }
+        public function user_feedback_form_forwardto(){
+        	require_once("admin/forwardto.php");
         }
 
         public function on_activate( $network_wide ) {
@@ -192,6 +197,7 @@ require_once('layout/form.php');
           global $wpdb;
           $feedback_table = $wpdb->prefix . 'user_feedback_form';
           $reply_feedback_table= $wpdb->prefix . 'user_feedback_form_reply';
+          $forward_feedback_table= $wpdb->prefix . 'user_feedback_form_forward';
           $sql_feedback = "CREATE TABLE IF NOT EXISTS ". $feedback_table . "(
                   	id INT( 10 ) NOT NULL AUTO_INCREMENT ,
                   	email VARCHAR( 100 ) NOT NULL ,
@@ -211,6 +217,15 @@ require_once('layout/form.php');
                     `reply_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (`id`)
                   )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+
+        $sql_feedback .= "CREATE TABLE IF NOT EXISTS ". $forward_feedback_table ." (
+                  `id` int(10) NOT NULL AUTO_INCREMENT,
+                  `feedback_id` int(10) NOT NULL,
+                  `forwarded_mail` VARCHAR( 100 ) NOT NULL ,
+                  `description` text NOT NULL,
+                  `forwarded_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  PRIMARY KEY (`id`)
+                )DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
         	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         	dbDelta( $sql_feedback );

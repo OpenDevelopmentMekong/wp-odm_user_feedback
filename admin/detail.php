@@ -8,6 +8,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
 global $wpdb;
+$forward_feedback_table = $wpdb->prefix . 'user_feedback_form_forward';
 $reply_feedback_table = $wpdb->prefix . 'user_feedback_form_reply';
 $feedback_table = $wpdb->prefix . 'user_feedback_form';
 $id = $_REQUEST['id'];
@@ -19,6 +20,11 @@ $resultset = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$feedback_table." WH
 $email = $resultset->email;
 $desc = $resultset->description;
 $file = $resultset->file_upload;
+if ($file) :
+	$uploads_dir = wp_upload_dir();
+	$attached_link = $uploads_dir['baseurl'].'/user_feedback_form/'.$file;
+	$file_upload = "<a target='_blank' href='".$attached_link."'>$file</a>";
+endif;
 $date_submitted = $resultset->date_submitted;
 $trash_command =($resultset->trash==1?'undo_trash':'trashed');
 $trash_display =($resultset->trash==1?'Undo Trash':'trash');
@@ -56,6 +62,7 @@ if(isset($_REQUEST['reply'])){
 }
 
 
+$forwardset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$forward_feedback_table." WHERE feedback_id = %d", $_REQUEST['id']));
 $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_table." WHERE feedback_id = %d", $_REQUEST['id']));
 ?>
 <div class="wrap">
@@ -64,6 +71,35 @@ $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_t
 <div id="poststuff" class="feedback_wrap">
 	<div id="post-body-content">
 		<div class="postarea">
+			<table class="reply-feedback" cellpadding="10px" style="width:100%">
+				<?php
+				if(isset($forwardset)):
+					foreach($forwardset as $forward){
+					?>
+					<tr>
+						<td>
+							<div style="float:right"><?php
+								$date = date_format(date_create($forward->forwarded_date),'M d, Y');
+								$time = date_format(date_create($forward->forwarded_date),'h:i:s A');
+								$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
+								echo($date_submitted); ?>
+							</div>
+							<strong>The feedback was forwarded to:
+								<?php echo $forward->forwarded_mail; ?>
+							</strong>
+							<?php
+							if($forward->description){
+									echo "<p>". nl2br($forward->description)."</p>";
+							}
+							?>
+						</td>
+					</tr>
+					<?php
+					}
+				endif;
+				?>
+			</table>
+
 			<h3 style="border:none">Detail of: <?php echo($email); ?><div style="float:right">
 	    	<a class="small-font" href="admin.php?page=user_feedback_form&id=<?php echo($_REQUEST['id']); ?>&action=delete" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a>&nbsp;|&nbsp;
 	      <a class="submitdelete small-font" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo $trash_command?>"><?php echo($trash_display) ?></a></div>
@@ -81,16 +117,11 @@ $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_t
 	        <tr>
 	            <td colspan="2" style="height:70px; border:1px solid #dedede; padding:10px; vertical-align:top"><?php echo nl2br($desc); ?></td>
 	        </tr>
-					<?php
-					if ($file) :
-		          $uploads_dir = wp_upload_dir();
-							$attached_link = $uploads_dir['baseurl'].'/user_feedback_form/'.$file;
-	            $file_upload = "<a target='_blank' href='".$attached_link."'>$file</a>";
-					?>
-	        <tr>
-	        	<td colspan="2" style="height:50px"><strong>File:</strong> <br/><strong><?php echo $file_upload; ?></strong></td>
-	        </tr>
-				<?php endif; ?>
+					<?php if (isset($file_upload) && !empty($file_upload)) :?>
+		        <tr>
+		        	<td colspan="2" style="height:50px"><strong>File:</strong> <br/><strong><?php echo $file_upload; ?></strong></td>
+		        </tr>
+					<?php endif; ?>
 	    	</table>
 					<div class="reply-feedback-container box-shadow">
 		      <h2>Reply:</h2>
