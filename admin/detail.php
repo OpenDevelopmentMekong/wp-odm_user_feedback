@@ -34,21 +34,22 @@ if(isset($_REQUEST['reply'])){
 	$reply_desc = $_REQUEST['reply'];
 
 	$insert = $wpdb->insert($reply_feedback_table,
-	array(
-		'feedback_id'=>$id,
-		'description'=>$reply_desc
-	),
-	array(
-	'%d',
-	'%s'
-	)
+		array(
+			'feedback_id'=>$id,
+			'description'=>$reply_desc
+		),
+		array(
+		'%d',
+		'%s'
+		)
 	);
 
 	$reply_count = $wpdb->get_results($wpdb->prepare("SELECT id FROM ".$reply_feedback_table." WHERE feedback_id = %d", $_REQUEST['id']));
 
 	$admin_email = get_option('admin_email');
 	$headers = 'Content-type: text/html; charset=utf-8' . "\r\n";
-	$headers .= 'From: '. $admin_email . "\r\n". "CC:".$admin_email;
+	$headers .= 'From: '. $admin_email;
+	//$headers .= "CC:".$admin_email;
 	$subject = 'Re: ODC Contact Form';
 	if(count($reply_count) > 1):
 		$message = $reply_desc;
@@ -56,11 +57,12 @@ if(isset($_REQUEST['reply'])){
 		$message = $reply_desc  . "\r\n\r\n".$date_submitted."\r\n"."Sent Message:\r\n".$desc;
 	endif;
 
-	/*$sent = mail( $email , $subject, $message,  $headers);
+	$sent = mail( $email , $subject, $message,  $headers);
+	$update = $wpdb->update( $feedback_table, array('status'=>2), array('id'=>$id));
+
 	if(isset($sent)):
   	echo('<div id="message" class="updated below-h2"><p>'.($sent ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
-	endif;*/
-	$update = $wpdb->update( $feedback_table, array('status'=>2), array('id'=>$id));
+	endif;
 }
 
 
