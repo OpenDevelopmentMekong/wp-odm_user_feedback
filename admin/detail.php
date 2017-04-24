@@ -153,22 +153,11 @@ $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_t
 				</table>
 			</form>
 			<?php
-			else: ?>
-			<table class="reply-feedback" style="width:100%" cellpadding="10px">
-				<tbody>
-					<tr>
-						<td>
-						 <strong>Can't reply to the user becuase this is an anonymous user.</strong>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<?php
 			endif;
 			?>
 
 			<div class="reply-feedback-container box-shadow">
-	      <h2>Replied Message(s):</h2>
+	      <h2>Replied Message:</h2>
 				<?php
 				if($email !="Anonymous user" && $email != get_option('admin_email')):
 				?>
