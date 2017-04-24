@@ -120,7 +120,6 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 <div class="wrap">
 <div id="icon-edit" class="icon32 icon32-posts-law_regulation"><br></div>
 <h2>User Feedback</h2>
-<p><strong>List of <?php echo($only=='t'?'trashed':''); ?> Feedback from user:</strong></p>
 <ul class="subsubsub">
 	<li class="all"><a href="admin.php?page=user_feedback_form" class="current">All <span class="count">(<?php echo($all); ?>)</span></a> |</li>
 	<li class="publish"><a href="admin.php?page=user_feedback_form&only=trashed">Trashed <span class="count">(<?php echo($trash); ?>)</span></a></li>

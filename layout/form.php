@@ -1,7 +1,7 @@
 <?php
 function user_feedback_form_creation( $atts = array()){
     $org_name = get_bloginfo() ;
-    $discription["ask-question"] = __("Do you have a question that ", "wp-odm_user_feedback") . $org_name ." ". __("can help answer? We will gladly help you.", "wp-odm_user_feedback");
+    $discription["ask-question"] = __("Do you have questions on the content published by ", "wp-odm_user_feedback") . $org_name ."? <br/>". __("We will gladly help you.", "wp-odm_user_feedback");
     $discription["report-problem"] = __("Have you found a technical problem or issue on the ", "wp-odm_user_feedback"). $org_name." ".__("website?", "wp-odm_user_feedback");
     $discription["share-idea"] = __("Do you have a new idea that could help transform the ", "wp-odm_user_feedback"). $org_name." ".__("website? We will be glad to hear it.", "wp-odm_user_feedback");
     $discription["send-feedback"] = __("Tell us how we're doing.", "wp-odm_user_feedback");
@@ -95,9 +95,7 @@ function user_feedback_form_creation( $atts = array()){
                     </script>
                     </div>
                     <div id="thanks-msg">
-                        <p>
                         <h2><?php _e("Thank you for taking the time to get in contact!", "wp-odm_user_feedback"); ?></h2>
-                        </p>
                     </div>
     			    </div>
             </div>
