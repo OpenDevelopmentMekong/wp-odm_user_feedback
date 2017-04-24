@@ -94,10 +94,11 @@ function user_feedback_form_creation( $atts = array()){
                     jQuery( "#tabs<?php echo $form_index; ?>" ).tabs();
                     </script>
                     </div>
-                    <div id="thanks-msg">
-                        <h2><?php _e("Thank you for taking the time to get in contact!", "wp-odm_user_feedback"); ?></h2>
-                    </div>
     			    </div>
+            </div>
+
+            <div id="thanks-msg">
+                <h2><?php _e("Thank you for taking the time to get in contact!", "wp-odm_user_feedback"); ?></h2>
             </div>
     </div>
     <?php user_feedback_form_script( $atts['is_popup_form'], $form_index, $placeholder, $show_form); ?>

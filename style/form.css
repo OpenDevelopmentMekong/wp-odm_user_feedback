@@ -219,8 +219,9 @@ span.needed{
 
 #thanks-msg{
 	display: none;
-	width:100%;
-	vertical-align:middle;
+	width:96%;
+	position: absolute;
+	top: 48%;
 	text-align:center;
 	}
 div.view_upload_status{

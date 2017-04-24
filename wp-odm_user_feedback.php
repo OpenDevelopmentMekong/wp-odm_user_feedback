@@ -40,14 +40,15 @@ require_once('layout/form.php');
         }
 
         public function load_text_domain() {
-          load_plugin_textdomain( 'wp-odm_user_feedback', false,  dirname( plugin_basename( __FILE__ ) ) . '/i18n' );
+          $locale = apply_filters( 'plugin_locale', get_locale(), 'odi' );
+          load_textdomain( 'odi', trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
         }
 
         public function button_user_feedback_form(){
         ?>
           <div id="wrap-feedback" class="wrap-feedback_fix_left">
             <div id="feedback-button" class="feedback-button">
-              <a id="user_feedback_form"><?php _e('Contact us', 'wp-odm_user_feedback'); ?></a>
+              <a id="user_feedback_form"><?php _e('Contact us', 'odi'); ?></a>
             </div>
             <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
@@ -260,7 +261,7 @@ require_once('layout/form.php');
       	  if(unlink($removed_file)):
             echo("Successful"); die();
           else:
-            _e('Unable to delete file!', "wp-odm_user_feedback");
+            _e('Unable to delete file!', 'odi');
             die();
           endif;
 
