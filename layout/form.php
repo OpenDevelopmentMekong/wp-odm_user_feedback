@@ -2,6 +2,7 @@
 function user_feedback_form_creation( $atts = array()){
     $org_name = get_bloginfo() ;
 <<<<<<< HEAD
+<<<<<<< HEAD
     $discription["ask-question"] = __("Do you have a question that ", 'odi') . $org_name ." ". __("can help answer? We will gladly help you.", 'odi');
     $discription["report-problem"] = __("Have you found a technical problem or issue on the ", 'odi'). $org_name." ".__("website?", 'odi');
     $discription["share-idea"] = __("Do you have a new idea that could help transform the ", 'odi'). $org_name." ".__("website? We will be glad to hear it.", 'odi');
@@ -9,6 +10,9 @@ function user_feedback_form_creation( $atts = array()){
     $discription["submit-resource"] = __("Do you have resources that could help expand the ", 'odi'). $org_name." ".__("website? We will review any map data, laws, articles, and documents that we do not yet have and see if we can implement them into our site. Please make sure the resources are in the public domain or fall under a <a class='a-normal' target='_blank' href='http://creativecommons.org/'>Creative Commons</a> license.", 'odi');
 =======
     $discription["ask-question"] = __("Do you have questions on the content published by ", "wp-odm_user_feedback") . $org_name ."? <br/>". __("We will gladly help you.", "wp-odm_user_feedback");
+=======
+    $discription["ask-question"] = __("Do you have questions on the content published by ", "wp-odm_user_feedback") . $org_name ."? ". __("We will gladly help you.", "wp-odm_user_feedback");
+>>>>>>> 220e15a3b1c06eb9fd598c0b0f1187fd09461ada
     $discription["report-problem"] = __("Have you found a technical problem or issue on the ", "wp-odm_user_feedback"). $org_name." ".__("website?", "wp-odm_user_feedback");
     $discription["share-idea"] = __("Do you have a new idea that could help transform the ", "wp-odm_user_feedback"). $org_name." ".__("website? We will be glad to hear it.", "wp-odm_user_feedback");
     $discription["send-feedback"] = __("Tell us how we're doing.", "wp-odm_user_feedback");
