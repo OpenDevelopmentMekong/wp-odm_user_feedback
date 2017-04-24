@@ -1,21 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-03-24 18:03+0700\n"
-"PO-Revision-Date: 2017-03-24 18:03+0700\n"
+"POT-Creation-Date: 2017-04-24 09:44+0700\n"
+"PO-Revision-Date: 2017-04-24 09:44+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: _e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:51
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:50
 msgid "Contact us"
 msgstr ""
 
@@ -83,10 +83,10 @@ msgstr ""
 msgid "Something's gone wrong, Please Resubmit the form!"
 msgstr ""
 
-#: ../layout/form.php:99
+#: ../layout/form.php:98
 msgid "Thank you for taking the time to get in contact!"
 msgstr ""
 
-#: ../wp-odm_user_feedback.php:223
+#: ../wp-odm_user_feedback.php:263
 msgid "Unable to delete file!"
 msgstr ""
