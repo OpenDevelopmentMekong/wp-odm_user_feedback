@@ -4,7 +4,7 @@ require_once('layout/form.php');
  * Plugin Name: User Feedback Form
  * Plugin URI: http://www.opendevelopmentcambodia.net/
  * Description: The plugin that let's user to have feedback to ODC
- * Version: 2.2.0
+ * Version: 2.1.2
  * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
  * Forked from: userfeedback (By Mr. HENG Cham Roeun)
  * Author URI: http://www.opendevelopmentcambodia.net/
