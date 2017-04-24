@@ -1,29 +1,17 @@
 <?php
 function user_feedback_form_creation( $atts = array()){
     $org_name = get_bloginfo() ;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    $discription["ask-question"] = __("Do you have a question that ", 'odi') . $org_name ." ". __("can help answer? We will gladly help you.", 'odi');
-    $discription["report-problem"] = __("Have you found a technical problem or issue on the ", 'odi'). $org_name." ".__("website?", 'odi');
-    $discription["share-idea"] = __("Do you have a new idea that could help transform the ", 'odi'). $org_name." ".__("website? We will be glad to hear it.", 'odi');
-    $discription["send-feedback"] = __("Tell us how we're doing.", 'odi');
-    $discription["submit-resource"] = __("Do you have resources that could help expand the ", 'odi'). $org_name." ".__("website? We will review any map data, laws, articles, and documents that we do not yet have and see if we can implement them into our site. Please make sure the resources are in the public domain or fall under a <a class='a-normal' target='_blank' href='http://creativecommons.org/'>Creative Commons</a> license.", 'odi');
-=======
-    $discription["ask-question"] = __("Do you have questions on the content published by ", "wp-odm_user_feedback") . $org_name ."? <br/>". __("We will gladly help you.", "wp-odm_user_feedback");
-=======
     $discription["ask-question"] = __("Do you have questions on the content published by ", "wp-odm_user_feedback") . $org_name ."? ". __("We will gladly help you.", "wp-odm_user_feedback");
->>>>>>> 220e15a3b1c06eb9fd598c0b0f1187fd09461ada
     $discription["report-problem"] = __("Have you found a technical problem or issue on the ", "wp-odm_user_feedback"). $org_name." ".__("website?", "wp-odm_user_feedback");
     $discription["share-idea"] = __("Do you have a new idea that could help transform the ", "wp-odm_user_feedback"). $org_name." ".__("website? We will be glad to hear it.", "wp-odm_user_feedback");
     $discription["send-feedback"] = __("Tell us how we're doing.", "wp-odm_user_feedback");
     $discription["submit-resource"] = __("Do you have resources that could help expand the ", "wp-odm_user_feedback"). $org_name." ".__("website? We will review any map data, laws, articles, and documents that we do not yet have and see if we can implement them into our site. Please make sure the resources are in the public domain or fall under a <a class='a-normal' target='_blank' href='http://creativecommons.org/'>Creative Commons</a> license.", "wp-odm_user_feedback");
->>>>>>> 2760bfc5a4a6be0a45b58ff70ae177bd005d25f4
 
-    $placeholder["ask-question"] = __("Ask us anything about the ", 'odi'). $org_name." ". __("website or  open data.", 'odi');
-    $placeholder["report-problem"] = __("Tell us about what you have found.", 'odi');
-    $placeholder["share-idea"] = __("Describe your idea here.", 'odi');
-    $placeholder["send-feedback"] = __("Do you have suggestions on how ", 'odi').$org_name." ". __("can be improved?", 'odi');
-    $placeholder["submit-resource"] = __("Tell us about the resources you're sharing with us.", 'odi');
+    $placeholder["ask-question"] = __("Ask us anything about the ", "wp-odm_user_feedback"). $org_name." ". __("website or  open data.", "wp-odm_user_feedback");
+    $placeholder["report-problem"] = __("Tell us about what you have found.", "wp-odm_user_feedback");
+    $placeholder["share-idea"] = __("Describe your idea here.", "wp-odm_user_feedback");
+    $placeholder["send-feedback"] = __("Do you have suggestions on how ", "wp-odm_user_feedback").$org_name." ". __("can be improved?", "wp-odm_user_feedback");
+    $placeholder["submit-resource"] = __("Tell us about the resources you're sharing with us.", "wp-odm_user_feedback");
 
     $show_form = isset($atts['show_form'])? $atts['show_form']: "all";
     $get_formname = array_keys($discription);
@@ -35,7 +23,7 @@ function user_feedback_form_creation( $atts = array()){
     <div id="user_feedback_form_container" class="user_feedback_form_<?php echo  odm_language_manager()->get_current_language();?>">
     	<?php if ($atts['is_popup_form']){ ?>
         	<div id="close-button"></div>
-        	<h2><?php _e(isset($atts['title'])? $atts['title']:"Contact us", 'odi');?></h2>
+        	<h2><?php _e(isset($atts['title'])? $atts['title']:"Contact us", "wp-odm_user_feedback");?></h2>
     	<?php } ?>
             <div id="wrapper">
             	<div id="long-all<?php echo $form_index; ?>" class="long-all">
@@ -44,11 +32,11 @@ function user_feedback_form_creation( $atts = array()){
                     <div id="tabs<?php echo $form_index; ?>" class="tabs">
                     <?php if ($show_form == "all"){ ?>
                       <ul id="choice">
-                        <li id="ask-question"><a href="#involve"><span><?php _e("Ask Question", 'odi');?></span></a></li>
-                        <li id="report-problem"><a href="#involve"><span><?php _e("Report Problem", 'odi');?></span></a></li>
-                        <li id="share-idea"><a href="#involve"><span><?php _e("Share Idea", 'odi');?></span></a></li>
-                        <li id="send-feedback"><a href="#involve"><span><?php _e("Send Feedback", 'odi');?></span></a></li>
-                        <li id="submit-resource"><a href="#involve"><span><?php _e("Submit Resources", 'odi');?></span></a></li>
+                        <li id="ask-question"><a href="#involve"><span><?php _e("Ask Question", "wp-odm_user_feedback");?></span></a></li>
+                        <li id="report-problem"><a href="#involve"><span><?php _e("Report Problem", "wp-odm_user_feedback");?></span></a></li>
+                        <li id="share-idea"><a href="#involve"><span><?php _e("Share Idea", "wp-odm_user_feedback");?></span></a></li>
+                        <li id="send-feedback"><a href="#involve"><span><?php _e("Send Feedback", "wp-odm_user_feedback");?></span></a></li>
+                        <li id="submit-resource"><a href="#involve"><span><?php _e("Submit Resources", "wp-odm_user_feedback");?></span></a></li>
                       </ul>
                        <?php } ?>
                       <div id="involve" class="involve" <?php if ($show_form == "all"){ echo "style='border-top:none'" ;}?>>
@@ -72,33 +60,33 @@ function user_feedback_form_creation( $atts = array()){
                         ?>
                         <textarea id="question-textarea<?php echo $form_index; ?>" class="question-textarea" rows="10" placeholder="<?php echo isset($placeholder[$show_form])? $placeholder[$show_form] : $placeholder["ask-question"]; ?>"></textarea>
                         <input id="file-upload<?php echo $form_index; ?>" class="file-upload" type="file" name="fileupload"/>
-                        <input id="fake-text<?php echo $form_index; ?>" class="fake-text" type="text" placeholder="<?php _e('Attach file (supported type: jpg, png, pdf, doc(x), xls(x), zip).', 'odi'); ?>" />
-                        <input id="fake-browse<?php echo $form_index; ?>" class="fake-browse" type="button" value="<?php _e('Browse', 'odi');?>" />
+                        <input id="fake-text<?php echo $form_index; ?>" class="fake-text" type="text" placeholder="<?php _e('Attach file (supported type: jpg, png, pdf, doc(x), xls(x), zip).', "wp-odm_user_feedback"); ?>" />
+                        <input id="fake-browse<?php echo $form_index; ?>" class="fake-browse" type="button" value="<?php _e('Browse', "wp-odm_user_feedback");?>" />
 
                         <div id="view_upload_status<?php echo $form_index; ?>" class="view_upload_status">
                           <div class="successful_status">
-                            <a href="<?php echo site_url(); ?>/#view" target="_blank" id="view_uploaded<?php echo $form_index; ?>"><?php _e("View", 'odi');?></a> <span>|</span>
-                            <a id="delete_upload<?php echo $form_index; ?>" href="<?php echo site_url(); ?>/#delete"><?php _e("Delete", 'odi');?></a>
+                            <a href="<?php echo site_url(); ?>/#view" target="_blank" id="view_uploaded<?php echo $form_index; ?>"><?php _e("View", "wp-odm_user_feedback");?></a> <span>|</span>
+                            <a id="delete_upload<?php echo $form_index; ?>" href="<?php echo site_url(); ?>/#delete"><?php _e("Delete", "wp-odm_user_feedback");?></a>
                           </div>
-                          <div id="deleted-status<?php echo $form_index; ?>" class="deleted-status"><?php _e("File was deleted", 'odi');?></div>
-                          <div id="error-upload<?php echo $form_index; ?>" class="error-upload"><?php _e("ERROR!", 'odi');?></div>
+                          <div id="deleted-status<?php echo $form_index; ?>" class="deleted-status"><?php _e("File was deleted", "wp-odm_user_feedback");?></div>
+                          <div id="error-upload<?php echo $form_index; ?>" class="error-upload"><?php _e("ERROR!", "wp-odm_user_feedback");?></div>
                         </div>
 
 
                         <div id="process-state<?php echo $form_index; ?>" class="process-state"></div>
 
-                        <input id="email<?php echo $form_index; ?>" class="email" type="text" placeholder="<?php _e("Your Email (Will not be published)", 'odi');?>" />
+                        <input id="email<?php echo $form_index; ?>" class="email" type="text" placeholder="<?php _e("Your Email (Will not be published)", "wp-odm_user_feedback");?>" />
                       </div>
                       <div id="disclaimer" class="submit-resource <?php echo ($show_form != "submit-resource")? "hide" : null;?>">
-                      	<p class="disclaimer-p" id="disclaimer-p<?php echo $form_index; ?>"><?php echo  __("Disclaimer: ", 'odi').$org_name." ".__("will thoroughly review all submitted resources for integrity and relevancy before the resources are hosted. All hosted resources will be in the public domain, or licensed under Creative Commons. We thank you for your support.", 'odi');?></p>
+                      	<p class="disclaimer-p" id="disclaimer-p<?php echo $form_index; ?>"><?php echo  __("Disclaimer: ", "wp-odm_user_feedback").$org_name." ".__("will thoroughly review all submitted resources for integrity and relevancy before the resources are hosted. All hosted resources will be in the public domain, or licensed under Creative Commons. We thank you for your support.", "wp-odm_user_feedback");?></p>
                       </div>
                       </div>
                       <div id="submit-div<?php echo $form_index; ?>" class="submit-div">
-                        <input id="submit-button<?php echo $form_index; ?>" class="submit-button" type="submit" value="<?php _e("Submit", 'odi')?>"/>
+                        <input id="submit-button<?php echo $form_index; ?>" class="submit-button" type="submit" value="<?php _e("Submit", "wp-odm_user_feedback")?>"/>
                         <div id="process-state-submit<?php echo $form_index; ?>" class="process-state-submit"></div>
-                        <span class='needed question-needed' id='question-needed<?php echo $form_index; ?>'><?php _e("* The idea box couldn't be blank!", 'odi');?></span>
-                        <span class='needed email-invalid' id='email-invalid<?php echo $form_index; ?>'><?php _e("* The email address is not valid!", 'odi');?></span>
-                        <span id="submit-error<?php echo $form_index; ?>" class="submit-error"><?php _e("Something's gone wrong, Please Resubmit the form!", 'odi');?></span>
+                        <span class='needed question-needed' id='question-needed<?php echo $form_index; ?>'><?php _e("* The idea box couldn't be blank!", "wp-odm_user_feedback");?></span>
+                        <span class='needed email-invalid' id='email-invalid<?php echo $form_index; ?>'><?php _e("* The email address is not valid!", "wp-odm_user_feedback");?></span>
+                        <span id="submit-error<?php echo $form_index; ?>" class="submit-error"><?php _e("Something's gone wrong, Please Resubmit the form!", "wp-odm_user_feedback");?></span>
                       </div>
                     </div>
                      </form>
@@ -107,13 +95,7 @@ function user_feedback_form_creation( $atts = array()){
                     </script>
                     </div>
                     <div id="thanks-msg">
-<<<<<<< HEAD
-                        <p>
-                        <h2><?php _e("Thank you for taking the time to get in contact!", 'odi'); ?></h2>
-                        </p>
-=======
                         <h2><?php _e("Thank you for taking the time to get in contact!", "wp-odm_user_feedback"); ?></h2>
->>>>>>> 2760bfc5a4a6be0a45b58ff70ae177bd005d25f4
                     </div>
     			    </div>
             </div>
