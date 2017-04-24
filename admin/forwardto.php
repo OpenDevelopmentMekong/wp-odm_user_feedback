@@ -51,8 +51,12 @@ if(isset($_REQUEST['forwardto_email']) && !empty($_REQUEST['forwardto_email'])){
 	$subject = 'FW: ODC Contact Form';
 	$feedback_url = get_bloginfo("url").'/wp-admin/admin.php?page=feedback_detail&id='. $id;
 	$view_message = '<a href="'.$feedback_url.'" title="View this feedback" rel="permalink">'.$feedback_url.'</a>';
+
 	$message = $forward_desc;
-	$message .= "<br/><strong>View message on web:</strong> ".$view_message;
+	if(empty($forward_desc)):
+		$message = "<strong>Dear team, </strong><br/> Below is the question/feedback of users sent through the Contact Form of WP.";
+	endif;
+	$message .= "<p><strong>View message on web:</strong> ".$view_message."</p>";
 	$message .= "<p><strong>Forwarded Message:</strong><br/>". "From:&nbsp; ".$email. "<br/> On: ".$date_submitted."</p>";
 	$message .= "<strong>User's message:</strong><br/>". nl2br($desc);
 
@@ -64,7 +68,7 @@ if(isset($_REQUEST['forwardto_email']) && !empty($_REQUEST['forwardto_email'])){
 	if(isset($sent)):
   	echo('<div id="message" class="updated below-h2"><p>'.($sent ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
 	endif;
-	
+
 	$update = $wpdb->update( $feedback_table, array('status'=>3), array('id'=>$id));
 } elseif(isset($insert) && ($insert==false)){
 	echo('<div id="message" class="updated below-h2"><p>Can not forward.</p></div>');
@@ -82,39 +86,14 @@ $forwardset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$forward_feedba
 			<div class="reply-feedback-container-1 box-shadow">
 				<form action="admin.php?page=feedback_forward&id=<?php echo($_REQUEST['id']); ?>" method="post">
 					<table class="reply-feedback" cellpadding="10px" style="width:100%">
+					<?php
+						if($email =="Anonymous user" || $email == get_option('admin_email')): ?>
 						<tr>
 							<td>
-							<?php
-							if($email =="Anonymous user" || $email == get_option('admin_email')):
-									echo "<strong>Noted: This is an anonymous user.</strong>";
-							endif;
-							?>
+									<strong>Noted: This is an anonymous user.</strong>
 							</td>
 						</tr>
 						<?php
-						if(isset($forwardset)):
-							foreach($forwardset as $forward){
-							?>
-							<tr>
-								<td>
-									<div style="float:right"><?php
-										$date = date_format(date_create($forward->forwarded_date),'M d, Y');
-										$time = date_format(date_create($forward->forwarded_date),'h:i:s A');
-										$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
-										echo($date_submitted); ?>
-									</div>
-									<strong>Forwarded to:
-										<?php echo $forward->forwarded_mail; ?>
-									</strong>
-									<?php
-									if($forward->description){
-											echo "<p>". nl2br($forward->description)."</p>";
-									}
-									?>
-								</td>
-							</tr>
-							<?php
-							}
 						endif;
 						?>
 						<tr>
@@ -135,7 +114,13 @@ $forwardset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$forward_feedba
 						</tr>
 						<tr>
 							<td>
-								<h3 style="border:none">Forwarded Message:</h3>
+								<h3>User's Message:
+								<div class="action">
+									<a class="small-font" href="admin.php?page=feedback_detail&id=<?php echo($id); ?>" title="View this feedback" rel="permalink">Reply</a>&nbsp;|&nbsp;
+									 <a class="small-font" href="admin.php?page=user_feedback_form&id=<?php echo($_REQUEST['id']); ?>&action=delete" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a>&nbsp;|&nbsp;
+									 <a class="submitdelete small-font" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo $trash_command?>"><?php echo($trash_display) ?></a>
+								</div>
+								</h3>
 								<hr style="border-bottom:none; margin-bottom:0px;" />
 								<p>From:&nbsp;<strong><?php echo $email; ?></strong></p>
 								<p>
@@ -151,14 +136,43 @@ $forwardset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$forward_feedba
 						</tr>
 					</table>
 				</form>
-				<p style="text-align:right">
-				 	 <a class="small-font" href="admin.php?page=user_feedback_form&id=<?php echo($_REQUEST['id']); ?>&action=delete" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a>&nbsp;|&nbsp;
-				 	 <a class="submitdelete small-font" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo $trash_command?>"><?php echo($trash_display) ?></a>
-				</p>
+				<br/>
 
+				<?php
+				if(isset($forwardset) && !empty($forwardset)):
+				?>
+				<table class="reply-feedback" cellpadding="10px" style="width:100%">
+					<?php
+					echo "<tr><td>";
+					echo "<strong>Message was forwarded to:</strong>";
+					echo "</td></tr>";
+					foreach($forwardset as $forward){
+					?>
+					<tr>
+						<td>
+							<div class="forward-date"><?php
+								$date = date_format(date_create($forward->forwarded_date),'M d, Y');
+								$time = date_format(date_create($forward->forwarded_date),'h:i:s A');
+								$date_submitted = $date.'<br/><a><span class="count">'.$time.'</span></a>';
+								echo($date_submitted); ?>
+							</div>
+							<strong>Email:</strong>
+								<?php echo $forward->forwarded_mail; ?>
+							<?php
+							if($forward->description){
+									echo "<p>". nl2br($forward->description)."</p>";
+							}
+							?>
+						</td>
+					</tr>
+					<?php
+					}
+				?>
+				</table>
+				<?php
+				endif;
+				?>
 			</div>
-
-
 		</div>
 	</div>
 </div>

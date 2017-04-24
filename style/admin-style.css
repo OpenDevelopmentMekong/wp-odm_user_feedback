@@ -25,8 +25,27 @@
 	background: #f4f4f4;
 	border: 1px solid #ccc
 }
+.reply-feedback h3{
+	border: none;
+}
+.action{
+	float: right;
+	display: inline-block;
+	text-align: right;
+}
+.message{
+	max-height:200px;
+	border:1px solid #dedede;
+	padding:10px;
+	vertical-align:top;
+	overflow-y: auto;
+}
 #forwardto{
 	border: 1px solid #ddd;
+}
+.forward-date{
+	font-size: 14px;
+	float: right;
 }
 .small-font{
 	font-size: 12px;

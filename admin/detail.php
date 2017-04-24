@@ -78,17 +78,20 @@ $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_t
 			<table class="reply-feedback" cellpadding="10px" style="width:100%">
 				<?php
 				if(isset($forwardset)):
+					echo "<tr><td>";
+					echo "<strong>Message was forwarded to:</strong>";
+					echo "</td></tr>";
 					foreach($forwardset as $forward){
 					?>
 					<tr>
 						<td>
-							<div style="float:right"><?php
+							<div class="forward-date"><?php
 								$date = date_format(date_create($forward->forwarded_date),'M d, Y');
 								$time = date_format(date_create($forward->forwarded_date),'h:i:s A');
 								$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
 								echo($date_submitted); ?>
 							</div>
-							<strong>The feedback was forwarded to:
+							<strong>Email:
 								<?php echo $forward->forwarded_mail; ?>
 							</strong>
 							<?php
@@ -104,83 +107,110 @@ $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_t
 				?>
 			</table>
 
+			<br/><hr style="border-bottom:none; margin-bottom:0px;" />
+
 			<h3 style="border:none">Detail of: <?php echo($email); ?><div style="float:right">
+		    <a class="small-font" href="admin.php?page=feedback_forward&id=<?php echo($_REQUEST['id']); ?>" title="View who has been forwarded to"><strong>Forward</strong></a>&nbsp;|&nbsp;
 	    	<a class="small-font" href="admin.php?page=user_feedback_form&id=<?php echo($_REQUEST['id']); ?>&action=delete" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a>&nbsp;|&nbsp;
 	      <a class="submitdelete small-font" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo $trash_command?>"><?php echo($trash_display) ?></a></div>
 	    </h3>
 
-	      <hr style="border-bottom:none; margin-bottom:0px;" />
-	    	<table width="100%">
-	    		<tr>
-	        	<td style="width:100px;height:50px">Email:&nbsp;<strong><?php echo($email); ?></strong></td>
-	            <td></td>
-	        </tr>
-	        <tr>
-	        	<td colspan="2" style="vertical-align:top; height:20px">Idea:</td>
-	        </tr>
-	        <tr>
-	            <td colspan="2" style="height:70px; border:1px solid #dedede; padding:10px; vertical-align:top"><?php echo nl2br($desc); ?></td>
-	        </tr>
+      <hr style="border-bottom:none; margin-bottom:0px;" />
+    	<table width="100%">
+    		<tr>
+        	<td colspan="2"><p>User:&nbsp;<strong><?php echo($email); ?></strong></p></td>
+        </tr>
+        <tr>
+        	<td colspan="2" style="vertical-align:top; height:20px">Message:<br />
+          	<div class="message"><?php echo nl2br($desc); ?></div>
+					</td>
+        </tr>
 					<?php if (isset($file_upload) && !empty($file_upload)) :?>
-		        <tr>
-		        	<td colspan="2" style="height:50px"><strong>File:</strong> <br/><strong><?php echo $file_upload; ?></strong></td>
-		        </tr>
-					<?php endif; ?>
-	    	</table>
-					<div class="reply-feedback-container box-shadow">
-		      <h2>Reply:</h2>
-					<?php
-					if($email !="Anonymous user" && $email != get_option('admin_email')):
-					?>
-		      <form action="admin.php?page=feedback_detail&id=<?php echo($_REQUEST['id']); ?>" method="post">
-		        <table class="reply-feedback" cellpadding="10px" style="width:100%">
-		        	<?php
-							foreach($replyset as $reply){
-								?>
-		         		<tr>
-									<td>
-			              <strong>
-				             	<?php echo(nl2br($reply->description)); ?>
-			              </strong>
-										<div style="float:right"><?php
-											$date = date_format(date_create($reply->reply_date),'M d, Y');
-											$time = date_format(date_create($reply->reply_date),'h:i:s A');
-											$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
-											echo($date_submitted); ?>
-										</div>
-		            	</td>
-								</tr>
-		            <?php
-							}
-		        	?>
-		       		<tr>
-								<td style="background-color:#eaeaea; border-bottom:1px solid #ffffff; height:30px;">
-		              <textarea name="reply" rows="5" placeholder="reply" style="width:100%"></textarea>
-		            </td>
-		       		</tr>
-		       		<tr>
-								<td>
-		          		<input type="submit" name="submit" value="Submit" id="apply-button" class="button action" style="float:right" />
-		          	</td>
-		       		</tr>
-		    		</table>
-		    	</form>
+        <tr>
+        	<td colspan="2" style="height:50px"><strong>File:</strong> <br/><strong><?php echo $file_upload; ?></strong></td>
+        </tr>
+				<?php endif; ?>
+    	</table>
 
-					<?php
-					else: ?>
-					<table class="reply-feedback" style="width:100%" cellpadding="10px">
-		        <tbody>
-							<tr>
+			<?php
+			if($email !="Anonymous user" && $email != get_option('admin_email')):
+			?>
+			<p>
+				<strong>Reply:</strong>
+			</p>
+			<form action="admin.php?page=feedback_detail&id=<?php echo($_REQUEST['id']); ?>" method="post">
+				<table class="reply-feedback" cellpadding="10px" style="width:100%">
+					<tr>
+						<td style="background-color:#eaeaea; border-bottom:1px solid #ffffff; height:30px;">
+							<textarea name="reply" rows="5" placeholder="reply" style="width:100%"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="submit" name="submit" value="Submit" id="apply-button" class="button action" style="float:right" />
+						</td>
+					</tr>
+				</table>
+			</form>
+			<?php
+			else: ?>
+			<table class="reply-feedback" style="width:100%" cellpadding="10px">
+				<tbody>
+					<tr>
+						<td>
+						 <strong>Can't reply to the user becuase this is an anonymous user.</strong>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<?php
+			endif;
+			?>
+
+			<div class="reply-feedback-container box-shadow">
+	      <h2>Replied Message(s):</h2>
+				<?php
+				if($email !="Anonymous user" && $email != get_option('admin_email')):
+				?>
+	      <form action="admin.php?page=feedback_detail&id=<?php echo($_REQUEST['id']); ?>" method="post">
+	        <table class="reply-feedback" cellpadding="10px" style="width:100%">
+	        	<?php
+						foreach($replyset as $reply){
+							?>
+	         		<tr>
 								<td>
-		             <strong>Can't reply to the user becuase this is an anonymous user.</strong>
+		              <strong>
+			             	<?php echo(nl2br($reply->description)); ?>
+		              </strong>
+									<div class="forward-date"><?php
+										$date = date_format(date_create($reply->reply_date),'M d, Y');
+										$time = date_format(date_create($reply->reply_date),'h:i:s A');
+										$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
+										echo($date_submitted); ?>
+									</div>
 	            	</td>
 							</tr>
-		    		</tbody>
-					</table>
-					<?php
-					endif;
-					?>
-				</div>
+	            <?php
+						}
+	        	?>
+	    		</table>
+	    	</form>
+
+				<?php
+				else: ?>
+				<table class="reply-feedback" style="width:100%" cellpadding="10px">
+	        <tbody>
+						<tr>
+							<td>
+	             <strong>Can't reply to the user becuase this is an anonymous user.</strong>
+            	</td>
+						</tr>
+	    		</tbody>
+				</table>
+				<?php
+				endif;
+				?>
+			</div>
 		</div>
 	</div>
 </div>
