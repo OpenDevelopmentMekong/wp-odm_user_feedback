@@ -49,7 +49,7 @@ require_once('layout/form.php');
             <div id="feedback-button" class="feedback-button">
               <a id="user_feedback_form"><?php _e('Contact us', 'wp-odm_user_feedback'); ?></a>
             </div>
-            <img class="hide-feedbackbuttom"src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
+            <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
           <img class="show-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/right-circular.png">
         <?php

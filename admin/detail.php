@@ -82,7 +82,7 @@ $replyset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$reply_feedback_t
 					?>
 					<tr>
 						<td>
-							<div style="float:right"><?php
+							<div class="forward-date"><?php
 								$date = date_format(date_create($forward->forwarded_date),'M d, Y');
 								$time = date_format(date_create($forward->forwarded_date),'h:i:s A');
 								$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';

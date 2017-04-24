@@ -95,9 +95,7 @@ function user_feedback_form_creation( $atts = array()){
                     </script>
                     </div>
                     <div id="thanks-msg">
-                        <p>
                         <h2><?php _e("Thank you for taking the time to get in contact!", "wp-odm_user_feedback"); ?></h2>
-                        </p>
                     </div>
     			    </div>
             </div>

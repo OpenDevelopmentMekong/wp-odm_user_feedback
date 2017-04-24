@@ -51,8 +51,12 @@ if(isset($_REQUEST['forwardto_email']) && !empty($_REQUEST['forwardto_email'])){
 	$subject = 'FW: ODC Contact Form';
 	$feedback_url = get_bloginfo("url").'/wp-admin/admin.php?page=feedback_detail&id='. $id;
 	$view_message = '<a href="'.$feedback_url.'" title="View this feedback" rel="permalink">'.$feedback_url.'</a>';
+
 	$message = $forward_desc;
-	$message .= "<br/><strong>View message on web:</strong> ".$view_message;
+	if(empty($forward_desc)):
+		$message = "<strong>Dear team, </strong><br/> Below is the question/feedback of users sent through the Contact Form of WP.";
+	endif;
+	$message .= "<p><strong>View message on web:</strong> ".$view_message."</p>";
 	$message .= "<p><strong>Forwarded Message:</strong><br/>". "From:&nbsp; ".$email. "<br/> On: ".$date_submitted."</p>";
 	$message .= "<strong>User's message:</strong><br/>". nl2br($desc);
 
@@ -64,7 +68,7 @@ if(isset($_REQUEST['forwardto_email']) && !empty($_REQUEST['forwardto_email'])){
 	if(isset($sent)):
   	echo('<div id="message" class="updated below-h2"><p>'.($sent ==true?'Email Sent':'Something went wrong, please try again').'</a></p></div>');
 	endif;
-	
+
 	$update = $wpdb->update( $feedback_table, array('status'=>3), array('id'=>$id));
 } elseif(isset($insert) && ($insert==false)){
 	echo('<div id="message" class="updated below-h2"><p>Can not forward.</p></div>');
@@ -97,10 +101,10 @@ $forwardset = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$forward_feedba
 							?>
 							<tr>
 								<td>
-									<div style="float:right"><?php
+									<div class="forward-date"><?php
 										$date = date_format(date_create($forward->forwarded_date),'M d, Y');
 										$time = date_format(date_create($forward->forwarded_date),'h:i:s A');
-										$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
+										$date_submitted = $date.'<br/><a><span class="count">'.$time.'</span></a>';
 										echo($date_submitted); ?>
 									</div>
 									<strong>Forwarded to:
