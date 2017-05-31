@@ -21,13 +21,13 @@
  		    public function __construct()
  		    {
           add_action("init", array($this, 'add_script'));
-          add_action('wpmu_new_blog', array($this, 'on_create_blog'));
-          add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_admin_style'));
+          add_action("wpmu_new_blog", array($this, 'on_create_blog'));
+          add_action("admin_enqueue_scripts", array($this, 'enqueue_custom_admin_style'));
           add_action("init", array($this, 'load_text_domain'));
           add_action("admin_menu", array($this, 'user_feedback_form_menu'));
           add_action("admin_menu", array($this, 'user_feedback_form_sub_menu'));
-          add_action("admin_menu", array($this, 'user_feedback_add_menu'));
-          add_action("admin_init", array($this, 'user_feedback_init_settings'));
+          add_action("admin_menu", array(&$this, 'user_feedback_add_menu'));
+          add_action("admin_init", array(&$this, 'user_feedback_init_settings'));
           add_action("wp_footer", array($this, 'button_user_feedback_form'));
           add_action("wp_footer", array($this, 'FeedbackForm'));
           add_action("wp_ajax_nopriv_FeedbackForm", array($this, 'FeedbackForm'));
@@ -162,9 +162,9 @@
         }
 
         public function user_feedback_form_sub_menu(){
-        	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', array(&$this, 'user_feedback_form_option_content_detail'));
+        	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', array($this, 'user_feedback_form_option_content_detail'));
 
-          add_submenu_page( NULL, 'Forward Feedback To', 'Forward Feedback To ', "edit_others_posts", 'feedback_forward', array(&$this, 'user_feedback_form_forwardto'));
+          add_submenu_page( NULL, 'Forward Feedback To', 'Forward Feedback To ', "edit_others_posts", 'feedback_forward', array($this, 'user_feedback_form_forwardto'));
         }
 
         public function user_feedback_form_option_content(){
@@ -279,34 +279,21 @@
         	return $support;
         }
         
-        /**
-         * hook into WP's admin_init action hook.
-         */
         public function user_feedback_init_settings()
         {
             $this->init_settings();
         }
 
-        
-        /**
-         * Initialize some custom settings.
-         */
         public function init_settings()
         {
             register_setting('user_feedback-group', 'user_feedback_additional_emails');                    
         }
         
-        /**
-         * add a menu.
-         */
         public function user_feedback_add_menu()
         {
-            add_options_page('User Feedback settings', 'wp-odm_user_feedback', 'manage_options', 'wp-odm_user_feedback', array($this, 'plugin_settings_page'));
+            add_options_page('User Feedback settings', 'user_feedback', 'manage_options', 'user_feedback', array(&$this, 'plugin_settings_page'));
         }
 
-        /**
-         * Menu Callback.
-         */
         public function plugin_settings_page()
         {
             if (!current_user_can('manage_options')) {
@@ -321,5 +308,4 @@ endif;
 
 $GLOBALS['user_feedback'] = new Odm_User_Feedback_Plugin();
 
-register_activation_hook(__FILE__, array($GLOBALS['user_feedback'], 'on_activate' ) );
- ?>
+register_activation_hook(__FILE__, array($GLOBALS['user_feedback'], 'on_activate' ) ); ?>
