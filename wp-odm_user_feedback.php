@@ -88,7 +88,7 @@
         	$request = $_REQUEST;
         	$insert = null;
         	$email_sender= $request["email"];
-          $receiver = get_option('admin_email');
+          $receiver = user_feedback_gather_email_adresses();
         	if(empty($email_sender)){
         		$email_sender = "Anonymous user";
         	}
