@@ -12,6 +12,7 @@
    */
    
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
+  include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
   
   $GLOBALS['user_feedback_options'] = new UserFeedback_Options();
 
