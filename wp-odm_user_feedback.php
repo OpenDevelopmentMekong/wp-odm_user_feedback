@@ -286,7 +286,7 @@
 
         public function init_settings()
         {
-            register_setting('user_feedback-group', 'user_feedback_additional_emails');                    
+            register_setting('user_feedback-group', 'user_feedback_additional_emails', 'wpckan_remove_whitespaces');                    
         }
         
         public function user_feedback_add_menu()
