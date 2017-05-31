@@ -1,14 +1,19 @@
 <?php
-require_once('layout/form.php');
-/**
- * Plugin Name: User Feedback Form
- * Plugin URI: http://www.opendevelopmentcambodia.net/
- * Description: The plugin that let's user to have feedback to ODC
- * Version: 2.1.2
- * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
- * Forked from: userfeedback (By Mr. HENG Cham Roeun)
- * Author URI: http://www.opendevelopmentcambodia.net/
- */
+  require_once('layout/form.php');
+ 
+  /**
+   * Plugin Name: User Feedback Form
+   * Plugin URI: http://www.opendevelopmentcambodia.net/
+   * Description: The plugin that let's user to have feedback to ODC
+   * Version: 2.1.2
+   * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
+   * Forked from: userfeedback (By Mr. HENG Cham Roeun)
+   * Author URI: http://www.opendevelopmentcambodia.net/
+   */
+   
+  include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
+  
+  $GLOBALS['user_feedback_options'] = new UserFeedback_Options();
 
  if (!class_exists('Odm_User_Feedback_Plugin')) :
      class Odm_User_Feedback_Plugin
@@ -21,6 +26,8 @@ require_once('layout/form.php');
           add_action("init", array($this, 'load_text_domain'));
           add_action("admin_menu", array($this, 'user_feedback_form_menu'));
           add_action("admin_menu", array($this, 'user_feedback_form_sub_menu'));
+          add_action("admin_menu", array($this, 'user_feedback_add_menu'));
+          add_action("admin_init", array($this, 'user_feedback_init_settings'));
           add_action("wp_footer", array($this, 'button_user_feedback_form'));
           add_action("wp_footer", array($this, 'FeedbackForm'));
           add_action("wp_ajax_nopriv_FeedbackForm", array($this, 'FeedbackForm'));
@@ -40,15 +47,15 @@ require_once('layout/form.php');
         }
 
         public function load_text_domain() {
-          $locale = apply_filters( 'plugin_locale', get_locale(), 'odi' );
-          load_textdomain( 'odi', trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
+          $locale = apply_filters( 'plugin_locale', get_locale(), wp-odm_user_feedback );
+          load_textdomain( wp-odm_user_feedback, trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
         }
 
         public function button_user_feedback_form(){
         ?>
           <div id="wrap-feedback" class="wrap-feedback_fix_left">
             <div id="feedback-button" class="feedback-button">
-              <a id="user_feedback_form"><?php _e('Contact us', 'odi'); ?></a>
+              <a id="user_feedback_form"><?php _e('Contact us', wp-odm_user_feedback); ?></a>
             </div>
             <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
@@ -261,7 +268,7 @@ require_once('layout/form.php');
       	  if(unlink($removed_file)):
             echo("Successful"); die();
           else:
-            _e('Unable to delete file!', 'odi');
+            _e('Unable to delete file!', wp-odm_user_feedback);
             die();
           endif;
 
@@ -271,11 +278,48 @@ require_once('layout/form.php');
         	$support = array('gif','png','jpg','jpeg','pdf','doc','docx','xls','xlsx','zip','rar');
         	return $support;
         }
+        
+        /**
+         * hook into WP's admin_init action hook.
+         */
+        public function user_feedback_init_settings()
+        {
+            $this->init_settings();
+        }
+
+        
+        /**
+         * Initialize some custom settings.
+         */
+        public function init_settings()
+        {
+            register_setting('user_feedback-group', 'user_feedback_additional_emails');                    
+        }
+        
+        /**
+         * add a menu.
+         */
+        public function user_feedback_add_menu()
+        {
+            add_options_page('User Feedback settings', 'wp-odm_user_feedback', 'manage_options', 'wp-odm_user_feedback', array($this, 'plugin_settings_page'));
+        }
+
+        /**
+         * Menu Callback.
+         */
+        public function plugin_settings_page()
+        {
+            if (!current_user_can('manage_options')) {
+                wp_die(__('You do not have sufficient permissions to access this page.'));
+            }
+
+            include sprintf('%s/templates/settings.php', dirname(__FILE__));
+        }
 
       }
 endif;
 
-$GLOBALS['userfeedback'] = new Odm_User_Feedback_Plugin();
+$GLOBALS['user_feedback'] = new Odm_User_Feedback_Plugin();
 
-register_activation_hook(__FILE__, array($GLOBALS['userfeedback'], 'on_activate' ) );
+register_activation_hook(__FILE__, array($GLOBALS['user_feedback'], 'on_activate' ) );
  ?>
