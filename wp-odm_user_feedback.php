@@ -291,7 +291,7 @@
         
         public function user_feedback_add_menu()
         {
-            add_options_page('User Feedback settings', 'user_feedback', 'manage_options', 'user_feedback', array(&$this, 'plugin_settings_page'));
+            add_options_page('User Feedback settings', 'User feedback form', 'manage_options', 'user_feedback', array(&$this, 'plugin_settings_page'));
         }
 
         public function plugin_settings_page()
