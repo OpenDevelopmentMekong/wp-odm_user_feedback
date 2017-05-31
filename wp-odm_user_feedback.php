@@ -1,14 +1,20 @@
 <?php
-require_once('layout/form.php');
-/**
- * Plugin Name: User Feedback Form
- * Plugin URI: http://www.opendevelopmentcambodia.net/
- * Description: The plugin that let's user to have feedback to ODC
- * Version: 2.1.2
- * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
- * Forked from: userfeedback (By Mr. HENG Cham Roeun)
- * Author URI: http://www.opendevelopmentcambodia.net/
- */
+  require_once('layout/form.php');
+ 
+  /**
+   * Plugin Name: User Feedback Form
+   * Plugin URI: http://www.opendevelopmentcambodia.net/
+   * Description: The plugin that let's user to have feedback to ODC
+   * Version: 2.1.3
+   * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
+   * Forked from: userfeedback (By Mr. HENG Cham Roeun)
+   * Author URI: http://www.opendevelopmentcambodia.net/
+   */
+   
+  include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
+  include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
+  
+  $GLOBALS['user_feedback_options'] = new UserFeedback_Options();
 
  if (!class_exists('Odm_User_Feedback_Plugin')) :
      class Odm_User_Feedback_Plugin
@@ -16,11 +22,13 @@ require_once('layout/form.php');
  		    public function __construct()
  		    {
           add_action("init", array($this, 'add_script'));
-          add_action('wpmu_new_blog', array($this, 'on_create_blog'));
-          add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_admin_style'));
+          add_action("wpmu_new_blog", array($this, 'on_create_blog'));
+          add_action("admin_enqueue_scripts", array($this, 'enqueue_custom_admin_style'));
           add_action("init", array($this, 'load_text_domain'));
           add_action("admin_menu", array($this, 'user_feedback_form_menu'));
           add_action("admin_menu", array($this, 'user_feedback_form_sub_menu'));
+          add_action("admin_menu", array(&$this, 'user_feedback_add_menu'));
+          add_action("admin_init", array(&$this, 'user_feedback_init_settings'));
           add_action("wp_footer", array($this, 'button_user_feedback_form'));
           add_action("wp_footer", array($this, 'FeedbackForm'));
           add_action("wp_ajax_nopriv_FeedbackForm", array($this, 'FeedbackForm'));
@@ -40,15 +48,15 @@ require_once('layout/form.php');
         }
 
         public function load_text_domain() {
-          $locale = apply_filters( 'plugin_locale', get_locale(), 'odi' );
-          load_textdomain( 'odi', trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
+          $locale = apply_filters( 'plugin_locale', get_locale(), wp-odm_user_feedback );
+          load_textdomain( wp-odm_user_feedback, trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
         }
 
         public function button_user_feedback_form(){
         ?>
           <div id="wrap-feedback" class="wrap-feedback_fix_left">
             <div id="feedback-button" class="feedback-button">
-              <a id="user_feedback_form"><?php _e('Contact us', 'odi'); ?></a>
+              <a id="user_feedback_form"><?php _e('Contact us', wp-odm_user_feedback); ?></a>
             </div>
             <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
@@ -81,7 +89,7 @@ require_once('layout/form.php');
         	$request = $_REQUEST;
         	$insert = null;
         	$email_sender= $request["email"];
-          $receiver = get_option('admin_email');
+          $receiver = user_feedback_gather_email_adresses();
         	if(empty($email_sender)){
         		$email_sender = "Anonymous user";
         	}
@@ -155,9 +163,9 @@ require_once('layout/form.php');
         }
 
         public function user_feedback_form_sub_menu(){
-        	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', array(&$this, 'user_feedback_form_option_content_detail'));
+        	add_submenu_page( NULL, 'Feedback Detail', 'Feedback Detail', "edit_others_posts", 'feedback_detail', array($this, 'user_feedback_form_option_content_detail'));
 
-          add_submenu_page( NULL, 'Forward Feedback To', 'Forward Feedback To ', "edit_others_posts", 'feedback_forward', array(&$this, 'user_feedback_form_forwardto'));
+          add_submenu_page( NULL, 'Forward Feedback To', 'Forward Feedback To ', "edit_others_posts", 'feedback_forward', array($this, 'user_feedback_form_forwardto'));
         }
 
         public function user_feedback_form_option_content(){
@@ -261,7 +269,7 @@ require_once('layout/form.php');
       	  if(unlink($removed_file)):
             echo("Successful"); die();
           else:
-            _e('Unable to delete file!', 'odi');
+            _e('Unable to delete file!', wp-odm_user_feedback);
             die();
           endif;
 
@@ -271,11 +279,34 @@ require_once('layout/form.php');
         	$support = array('gif','png','jpg','jpeg','pdf','doc','docx','xls','xlsx','zip','rar');
         	return $support;
         }
+        
+        public function user_feedback_init_settings()
+        {
+            $this->init_settings();
+        }
+
+        public function init_settings()
+        {
+            register_setting('user_feedback-group', 'user_feedback_additional_emails', 'wpckan_remove_whitespaces');                    
+        }
+        
+        public function user_feedback_add_menu()
+        {
+            add_options_page('User Feedback settings', 'User feedback form', 'manage_options', 'user_feedback', array(&$this, 'plugin_settings_page'));
+        }
+
+        public function plugin_settings_page()
+        {
+            if (!current_user_can('manage_options')) {
+                wp_die(__('You do not have sufficient permissions to access this page.'));
+            }
+
+            include sprintf('%s/templates/settings.php', dirname(__FILE__));
+        }
 
       }
 endif;
 
-$GLOBALS['userfeedback'] = new Odm_User_Feedback_Plugin();
+$GLOBALS['user_feedback'] = new Odm_User_Feedback_Plugin();
 
-register_activation_hook(__FILE__, array($GLOBALS['userfeedback'], 'on_activate' ) );
- ?>
+register_activation_hook(__FILE__, array($GLOBALS['user_feedback'], 'on_activate' ) ); ?>
