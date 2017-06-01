@@ -20,12 +20,3 @@
         <?php @submit_button(); ?>
     </form>
 </div>
-
-<script type="text/javascript">
-  jQuery(document).ready(function($) {
-    $('#wpckan_setting_uses_ckanext_fluent').change(function() {
-      console.log($('#wpckan_setting_uses_ckanext_fluent').attr('checked'));
-      $('#wpckan_setting_uses_ckanext_fluent').attr('checked') == "checked" ? $('#wpckan_setting_multilingual_fields').removeAttr("disabled") : $('#wpckan_setting_multilingual_fields').attr("disabled",true);
-    });
-  })
-</script>
