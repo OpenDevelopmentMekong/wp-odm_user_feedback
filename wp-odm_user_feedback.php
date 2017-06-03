@@ -48,8 +48,8 @@
         }
 
         public function load_text_domain() {
-          $locale = apply_filters( 'plugin_locale', get_locale(), wp-odm_user_feedback );
-          load_textdomain( wp-odm_user_feedback, trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
+          $locale = apply_filters( 'plugin_locale', get_locale(), 'wp-odm_user_feedback' );
+          load_textdomain( 'wp-odm_user_feedback', trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
         }
 
         public function button_user_feedback_form(){
