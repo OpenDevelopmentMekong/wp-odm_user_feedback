@@ -1,4 +1,9 @@
 jQuery(document).ready(function($) {
+		setTimeout(function(){
+      $(".wrap-feedback_fix_left").hide("slide", { direction: "left" }, 400);
+      $('.show-feedbackbuttom').show("slide", { direction: "left" }, 700);
+		}, 3000);
+		
     $("a#user_feedback_form").click(function(e) {
         $("div#wrap-feedback").after('<div id="overlay-div"></div>');
         $("div#overlay-div").after('<div id="loading-form"></div>');
