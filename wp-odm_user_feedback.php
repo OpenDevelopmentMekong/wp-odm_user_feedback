@@ -1,19 +1,19 @@
 <?php
   require_once('layout/form.php');
- 
+
   /**
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
    * Description: The plugin that let's user to have feedback to ODC
-   * Version: 2.1.4
+   * Version: 2.1.5
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
    */
-   
+
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
-  
+
   $GLOBALS['user_feedback_options'] = new UserFeedback_Options();
 
  if (!class_exists('Odm_User_Feedback_Plugin')) :
@@ -56,7 +56,7 @@
         ?>
           <div id="wrap-feedback" class="wrap-feedback_fix_left">
             <div id="feedback-button" class="feedback-button">
-              <a id="user_feedback_form"><?php _e('Contact us', wp-odm_user_feedback); ?></a>
+              <a id="user_feedback_form"><?php _e('Contact us', 'wp-odm_user_feedback'); ?></a>
             </div>
             <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
@@ -65,6 +65,9 @@
         }
 
         public function add_script(){
+          //wp_enqueue_script('google_recaptcha','https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit');
+          ?><script src='https://www.google.com/recaptcha/api.js'></script>
+          <?php
         	wp_enqueue_style("user_feedback_form_buttoncss", plugins_url("wp-odm_user_feedback")."/style/button.css");
         	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'));
           wp_enqueue_script('user_feedback_form_buttonjs');
@@ -279,7 +282,7 @@
         	$support = array('gif','png','jpg','jpeg','pdf','doc','docx','xls','xlsx','zip','rar');
         	return $support;
         }
-        
+
         public function user_feedback_init_settings()
         {
             $this->init_settings();
@@ -287,9 +290,9 @@
 
         public function init_settings()
         {
-            register_setting('user_feedback-group', 'user_feedback_additional_emails', 'wpckan_remove_whitespaces');                    
+            register_setting('user_feedback-group', 'user_feedback_additional_emails', 'wpckan_remove_whitespaces');
         }
-        
+
         public function user_feedback_add_menu()
         {
             add_options_page('User Feedback settings', 'User feedback form', 'manage_options', 'user_feedback', array(&$this, 'plugin_settings_page'));
