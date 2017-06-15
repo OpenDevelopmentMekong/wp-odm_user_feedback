@@ -65,9 +65,6 @@
         }
 
         public function add_script(){
-          //wp_enqueue_script('google_recaptcha','https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit');
-          ?><script src='https://www.google.com/recaptcha/api.js'></script>
-          <?php
         	wp_enqueue_style("user_feedback_form_buttoncss", plugins_url("wp-odm_user_feedback")."/style/button.css");
         	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'));
           wp_enqueue_script('user_feedback_form_buttonjs');
