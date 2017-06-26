@@ -5,7 +5,7 @@
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
    * Description: The plugin that let's user to have feedback to ODC
-   * Version: 2.1.5
+   * Version: 2.1.6
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
@@ -47,9 +47,9 @@
             return user_feedback_form_creation($arg);
         }
 
-        public function load_text_domain() {
-          $locale = apply_filters( 'plugin_locale', get_locale(), 'wp-odm_user_feedback' );
-          load_textdomain( 'wp-odm_user_feedback', trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
+        public function load_text_domain()
+        {
+          load_plugin_textdomain( 'wp-odm_user_feedback', false,  dirname( plugin_basename( __FILE__ ) ) . '/i18n' );
         }
 
         public function button_user_feedback_form(){
