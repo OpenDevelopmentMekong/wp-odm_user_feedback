@@ -80,9 +80,9 @@ function user_feedback_form_creation( $atts = array()){
                       </div>
                       <div id="submit-div<?php echo $form_index; ?>" class="submit-div">
                         <div class="recaptcha"><label><?php  _e("Please add the code:", "wp-odm_user_feedback"); ?></label>
-                        <input id="captcha_code" name="captcha_code" type="text" size="30" placeholder="<?php  _e("Code", "wp-odm_user_feedback"); ?>" />
+                        <input id="captcha_code" name="captcha_code" type="text" size="30" placeholder="<?php  _e("Code", "wp-odm_user_feedback"); ?>" autocomplete="off" />
                         </div>
-                        <img class="recaptcha-img float-left"  src="<?php echo $_SESSION['captcha']['image_src'] ?>" alt="CAPTCHA code" />
+                        <img class="recaptcha-img float-left"  src="<?php echo $_SESSION['captcha']['image_src'] ?>" alt="<?php echo $_SESSION['captcha']['code']; ?>" />
                         <img id="refresh-icon" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/refresh.png" />
                         <img id="refreshing-icon" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/refreshing.gif" />
 
@@ -176,7 +176,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
           action: 'Recaptcha',
         },
         success: function(data, textStatus, XMLHttpRequest){
-          var url = "<?php echo get_bloginfo("url"); ?>" + data.image_src;
+          var url = data.image_src;
           $('#hidden_captcha_code').val( data.code);
           $('.recaptcha-img').attr('src', url);
           $('#refresh-icon').show();
@@ -310,8 +310,6 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
             $('#process-state-submit<?php echo $form_index; ?>').css({'display':'inherit'});
           },
           success: function(data, textStatus, XMLHttpRequest){
-            console.log("data");
-            console.log(data);
             $("input:submit").removeAttr("disabled");
             if(data.trim() == "Successful"){
               $("#get-involve").hide();

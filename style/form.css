@@ -181,6 +181,7 @@ div.tabs input.submit-button{
 }
 .recaptcha label{
 	margin-bottom: 10px;
+	font-weight: normal;
 }
 #refresh-icon, #refreshing-icon{
 	font-size: 21px;
@@ -308,7 +309,7 @@ div.process-state{
 	}
 .error-status{
 	float: left;
-	margin: 2px 2px 0 1em;
+	margin: 8px 2px 0 1em;
 	width: 75%;
 }
 .error-upload{
