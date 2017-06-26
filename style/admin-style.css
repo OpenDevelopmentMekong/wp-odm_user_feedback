@@ -58,3 +58,18 @@
 .updated{
 	margin-left: 2px;
 }
+.ellipsis {
+	max-width: 450px;
+	max-height: 60px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+}
+.full-description{
+	height: 100%;
+	max-height: 300px;
+	overflow-y: auto;
+}
+.read-more{
+	cursor: pointer;
+	color: #0096dd;
+}
