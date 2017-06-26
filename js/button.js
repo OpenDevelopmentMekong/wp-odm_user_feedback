@@ -1,3 +1,5 @@
+/* v1.0.1 */
+
 jQuery(document).ready(function($) {
     $("a#user_feedback_form").click(function(e) {
         $("div#wrap-feedback").after('<div id="overlay-div"></div>');

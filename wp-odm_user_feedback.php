@@ -1,6 +1,4 @@
 <?php
-  require_once('layout/form.php');
- 
   /**
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
@@ -10,10 +8,19 @@
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
    */
-   
+
+  session_start();
+  $_SESSION = array();
+  require_once('layout/form.php');
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
-  
+  include_once plugin_dir_path(__FILE__).'utils/recaptcha/simple-php-captcha.php';
+
+  $_SESSION['captcha'] = simple_php_captcha(array(
+    'min_font_size' => 25,
+    'max_font_size' => 25,
+    'color' => '#333'
+  ));
   $GLOBALS['user_feedback_options'] = new UserFeedback_Options();
 
  if (!class_exists('Odm_User_Feedback_Plugin')) :
@@ -39,6 +46,8 @@
           add_action("wp_ajax_UploadFeedbackFile", array($this, 'UploadFeedbackFile'));
           add_action("wp_ajax_nopriv_DeleteUploadedFile", array($this, 'DeleteUploadedFile'));
           add_action("wp_ajax_DeleteUploadedFile", array($this, 'DeleteUploadedFile'));
+          add_action("wp_ajax_nopriv_Recaptcha", array($this, 'Recaptcha'));
+          add_action("wp_ajax_Recaptcha", array($this, 'Recaptcha'));
           add_action("user_feedback_form", array($this, 'user_feedback_form_shortcode_function'));
  		    }
 
@@ -56,7 +65,7 @@
         ?>
           <div id="wrap-feedback" class="wrap-feedback_fix_left">
             <div id="feedback-button" class="feedback-button">
-              <a id="user_feedback_form"><?php _e('Contact us', wp-odm_user_feedback); ?></a>
+              <a id="user_feedback_form"><?php _e('Contact us', "wp-odm_user_feedback"); ?></a>
             </div>
             <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
@@ -66,8 +75,10 @@
 
         public function add_script(){
         	wp_enqueue_style("user_feedback_form_buttoncss", plugins_url("wp-odm_user_feedback")."/style/button.css");
-        	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'));
+        	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'), 'v1.0.1');
           wp_enqueue_script('user_feedback_form_buttonjs');
+          wp_enqueue_script("recaptcha_js", "https://www.google.com/recaptcha/api.js", array(), '2.0.0');
+          wp_enqueue_script('recaptcha_js');
         	}
 
         public function enqueue_custom_admin_style() {
@@ -93,9 +104,11 @@
         	if(empty($email_sender)){
         		$email_sender = "Anonymous user";
         	}
+
         	$desc = $request["question_text"];
         	$type = $request["question_type"];
         	$file_name = $request["file_name"];
+
           $insert = $wpdb->insert($feedback_table,
             	array(
             		'email'=> $email_sender,
@@ -155,6 +168,16 @@
         	$filename = basename($new_destination_name);
         	echo('img_uploaded:'.$filename);
         	die();
+        }
+
+        public function Recaptcha(){
+          $recaptcha = simple_php_captcha(array(
+          	'min_font_size' => 25,
+          	'max_font_size' => 25,
+          	'color' => '#333'
+          ));
+          echo json_encode($recaptcha );
+          exit();
         }
 
         public function user_feedback_form_menu(){
@@ -279,7 +302,7 @@
         	$support = array('gif','png','jpg','jpeg','pdf','doc','docx','xls','xlsx','zip','rar');
         	return $support;
         }
-        
+
         public function user_feedback_init_settings()
         {
             $this->init_settings();
@@ -287,9 +310,9 @@
 
         public function init_settings()
         {
-            register_setting('user_feedback-group', 'user_feedback_additional_emails', 'wpckan_remove_whitespaces');                    
+            register_setting('user_feedback-group', 'user_feedback_additional_emails', 'wpckan_remove_whitespaces');
         }
-        
+
         public function user_feedback_add_menu()
         {
             add_options_page('User Feedback settings', 'User feedback form', 'manage_options', 'user_feedback', array(&$this, 'plugin_settings_page'));
