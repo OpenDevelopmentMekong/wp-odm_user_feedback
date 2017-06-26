@@ -204,7 +204,8 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
     function closeWindow(){
     	var overlay = $(window.parent.document.getElementById('overlay-div'));
     	$("div#user_feedback_form_fix_left").hide();
-        $("div#user_feedback_form_fix_left form").hide();
+      $("div#user_feedback_form_fix_left form").hide();
+      $('#recaptcha-error<?php echo $form_index; ?>').hide();
     	overlay.next().remove();
     	overlay.remove();
     }
@@ -241,9 +242,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
         	processData:false,
         	success: function(data, textStatus, jqXHR)
         	{
-            console.log(data);
         		if(data.indexOf('img_uploaded:') != -1){
-              console.log("DDDDDDDDDDDDDD");
         			$('div#process-state<?php echo $form_index; ?>').removeClass('process-state');
         			$('div#process-state<?php echo $form_index; ?>').addClass('process-state-done');
 

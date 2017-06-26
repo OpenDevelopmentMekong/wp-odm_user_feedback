@@ -311,6 +311,7 @@ div.process-state{
 	float: left;
 	margin: 8px 2px 0 1em;
 	width: 75%;
+	font-size:13px;
 }
 .error-upload{
 	float:right;
