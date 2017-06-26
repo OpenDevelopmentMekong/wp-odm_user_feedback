@@ -1,5 +1,5 @@
 <?php
-  /**
+/**
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
    * Description: The plugin that let's user to have feedback to ODC
@@ -56,16 +56,16 @@
             return user_feedback_form_creation($arg);
         }
 
-        public function load_text_domain() {
-          $locale = apply_filters( 'plugin_locale', get_locale(), 'wp-odm_user_feedback' );
-          load_textdomain( 'wp-odm_user_feedback', trailingslashit( WP_LANG_DIR ) . '-' . $locale . '.mo' );
+        public function load_text_domain()
+        {
+          load_plugin_textdomain( 'wp-odm_user_feedback', false,  dirname( plugin_basename( __FILE__ ) ) . '/i18n' );
         }
 
         public function button_user_feedback_form(){
         ?>
           <div id="wrap-feedback" class="wrap-feedback_fix_left">
             <div id="feedback-button" class="feedback-button">
-              <a id="user_feedback_form"><?php _e('Contact us', "wp-odm_user_feedback"); ?></a>
+              <a id="user_feedback_form"><?php _e('Contact us', 'wp-odm_user_feedback'); ?></a>
             </div>
             <img class="hide-feedbackbuttom" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/left-circular.png" />
           </div>
