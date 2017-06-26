@@ -129,27 +129,32 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
         <thead>
             <tr>
                 <th scope="col" id="cb" class="column-cb check-column"><input class="check-all" type="checkbox"></th>
-                <th scope="col" id="email">Email</th>
-                <th scope="col" id="type-of-feedback">Type of Feedback</th>
-                <th scope="col" id="description" class="column-title">Description</th>
-                <th scope="col" id="attachment">Attachment</th>
-                <th scope="col" id="submitted-date">Submitted</th>
-                <th scope="col" id="status" class="column-date">Status</th>
-                <th scope="col" id="Forward" class="column-date">Forward</th>
+                <th scope="col" id="email" width="20%">Email</th>
+                <th scope="col" id="type-of-feedback" width="15%">Type of Feedback</th>
+                <th scope="col" id="description" width="35%" class="column-discription">Description</th>
+                <th scope="col" id="attachment" width="10%">Attachment</th>
+                <th scope="col" id="submitted-date" width="10%">Submitted</th>
+                <th scope="col" id="status" class="column-date"  width="5%">Status</th>
+                <th scope="col" id="Forward" class="column-date" width="5%">Forward</th>
             </tr>
         </thead>
         <tbody>
           <?php foreach($result_set as $result_row){
             $id = $result_row->id;
             $email = $result_row->email;
-            $description = (strlen($result_row->description)>50?substr($result_row->description,0,50)."...":$result_row->description);
+            $description = $result_row->description;
             $type = ucwords(str_replace('-',' ', $result_row->type));
             $icon = plugins_url("wp-odm_user_feedback")."/style/images/".$icon_options[$result_row->type];
 
 
 	          $uploads_dir = wp_upload_dir();
-						$attached_link = $uploads_dir['baseurl'].'/user_feedback_form/'.$result_row->file_upload;
-            $file_upload = "<a target='_blank' href='".$attached_link."'>$result_row->file_upload</a>";
+						$file_upload = null;
+						if($result_row->file_upload){
+							$path_info = pathinfo($result_row->file_upload);
+							$extension = $path_info['extension'];
+							$attached_link = $uploads_dir['baseurl'].'/user_feedback_form/'.$result_row->file_upload;
+	            $file_upload = "<a target='_blank' href='".$attached_link."'>".strtoupper($extension)." attached</a>";
+						}
 						$date = date_format(date_create($result_row->date_submitted),'M d, Y');
 						$time = date_format(date_create($result_row->date_submitted),'h:i:s A');
 						$date_submitted = '<strong>'.$date.'</strong><br/><a><span class="count">'.$time.'</span></a>';
@@ -159,15 +164,26 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
             <tr>
                 <td scope="col" class="check-column"><input name="feed[]" type="checkbox" value="<?php echo($id); ?>"></td>
                 <td scope="col" id="email">
-                    <strong><a class="row-title"><?php echo($email) ?></a></strong>
+                    <strong><a href="admin.php?page=feedback_detail&id=<?php echo($id); ?>" class="row-title"><?php echo($email) ?></a></strong>
                     <div class="row-actions">
-                        <span class="view"><a href="admin.php?page=feedback_detail&id=<?php echo($id); ?>" title="View this feedback" rel="permalink">View</a> | </span>
+                        <span class="view"><a href="admin.php?page=feedback_detail&id=<?php echo($id); ?>" title="View this feedback" rel="permalink">Reply</a> | </span>
                         <span class="trash"><a class="submitdelete" title="Move this feedback to the Trash" href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=<?php echo($trash_command.($only=='t'?'&only=trashed':'')) ?>"><?php echo($trash_display) ?></a></span>
                         <span class="trash"> | <a href="admin.php?page=user_feedback_form&id=<?php echo($id); ?>&action=delete<?php echo(($only=='t'?'&only=trashed':'')); ?>" title="Delete this feedback" rel="permalink" onclick="javascript:return(confirm('This action could not rollback. Are you sure?'));">Delete</a></span>
                     </div>
                 </td>
                 <td scope="col" id="type-of-feedback"><strong><img src="<?php echo($icon) ?>" style="height:15px; width:auto; margin-right:5px; float:left"/><?php echo($type) ?></strong></td>
-                <td scope="col" id="description"><?php echo($description) ?></td>
+                <td scope="col" id="description">
+									<div class="ellipsis">
+										<?php echo($description) ?>
+									</div>
+									<?php
+									if(strlen($result_row->description)>150){
+										echo '<p class="float-right">
+														<a herf="#" class="read-more">read more</a>
+													</p>';
+									}
+									?>
+								</td>
                 <td scope="col" id="attachment"><?php echo($file_upload) ?></td>
                 <td scope="col" id="submitted-date"><?php echo($date_submitted) ?></td>
                 <td scope="col" id="status">
@@ -202,3 +218,11 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 </form>
 
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$(".read-more").click(function(event){
+			 $(event.target).text( $(this).text() == 'less' ? 'read more' : 'less');
+			 $(event.target).parent().siblings('.ellipsis').toggleClass("full-description");
+		});
+	});
+</script>

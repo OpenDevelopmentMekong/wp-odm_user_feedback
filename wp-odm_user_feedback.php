@@ -5,7 +5,7 @@
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
    * Description: The plugin that let's user to have feedback to ODC
-   * Version: 2.1.6
+   * Version: 2.1.8
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
