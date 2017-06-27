@@ -2,19 +2,20 @@
 /**
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
-   * Description: The plugin that let's user to have feedback to ODC
+   * Description: Wordpress plugin offering different contact
    * Version: 2.1.7
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
    */
 
-  session_start();
-  $_SESSION = array();
   require_once('layout/form.php');
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
-  include_once plugin_dir_path(__FILE__).'utils/recaptcha/simple-php-captcha.php';
+  include_once plugin_dir_path(__FILE__).'vendor/abeautifulsite/simple-php-captcha/simple-php-captcha.php';
+
+  session_start();
+  $_SESSION = array();
 
   $_SESSION['captcha'] = simple_php_captcha(array(
     'min_font_size' => 25,

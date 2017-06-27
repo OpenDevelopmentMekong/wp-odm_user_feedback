@@ -1,3 +1,4 @@
-/vendor/
+**/vendor/
 **.*mo
 .remote-sync.json
+composer.lock
