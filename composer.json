@@ -7,5 +7,7 @@
             "email": "huyeng@opendevcam.net"
         }
     ],
-    "require": {}
+    "require": {
+      "abeautifulsite/simple-php-captcha": "*"
+    }
 }

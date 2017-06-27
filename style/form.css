@@ -171,8 +171,27 @@ div.tabs input.fake-browse, div.tabs input.submit-button{
 div.tabs input.submit-button{
 	width:135px;
 	height:29px;
-	margin-left:0px;
+	margin-left:0;
+	margin-top: 0.1em;
+	clear:left;
 	}
+.recaptcha{
+	margin-right: 15px;
+	float: left;
+}
+.recaptcha label{
+	margin-bottom: 10px;
+	font-weight: normal;
+}
+#refresh-icon, #refreshing-icon{
+	font-size: 21px;
+  margin-left: -20px;
+  color: #888;
+  cursor: pointer;
+}
+#refreshing-icon{
+	display: none;
+}
 div.tabs input.fake-browse:hover, div.tabs input.submit-button:hover{
 	cursor:pointer;
 	border-color:#5c7a8c;
@@ -183,7 +202,7 @@ div.tabs input.submit-button:disabled{
 
 div#user_feedback_form_container div.tabs div.submit-div{
 	border:none;
-	padding-left:0px;
+	padding-left:1em;
 	padding-top:20px;
 	}
 span.needed{
@@ -224,17 +243,17 @@ span.needed{
 	top: 48%;
 	text-align:center;
 	}
-div.view_upload_status{
+.view_upload_status{
 	float: right;
   max-width: 240px;
-  margin-right: 20px;
+  margin-right: 0;
 	line-height:20px;
 	font-size: 13px;
 	position: relative;
 	top: 0;
 	}
 
-div.view_upload_status div{
+.view_upload_status div{
 	display: none;
 	}
 .successful_status a, .successful_status span{
@@ -272,7 +291,8 @@ div.process-state{
 .process-state-submit{
 	float:left;
 	height:29px;
-	margin-left:-35px;
+	margin-left:-30px;
+	margin-top: 2px;
 	width:29px;
 	display:none;
 	}
@@ -287,7 +307,13 @@ div.process-state{
 	background-position:center;
 	background-repeat:no-repeat;
 	}
-div.error-upload{
+.error-status{
+	float: left;
+	margin: 8px 2px 0 1em;
+	width: 75%;
+	font-size:13px;
+}
+.error-upload{
 	float:right;
 	margin-right: 10px;
 	border:none;
@@ -298,7 +324,19 @@ div.error-upload{
 .submit-error{
 	color:#F00;
 	display: none;
-	margin-left: 10px;
+}
+.recaptcha-error{
+	color:#F00;
+	display: none;
+}
+.g-recaptcha{
+	float: left;
+	margin-left: 1.5em;
+}
+.g-recaptcha textarea#g-recaptcha-response{
+	box-shadow: none;
+	padding: 0;
+	margin-bottom: 0;
 }
 .hide{
 	display: none;

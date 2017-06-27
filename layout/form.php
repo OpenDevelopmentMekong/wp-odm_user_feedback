@@ -58,10 +58,12 @@ function user_feedback_form_creation( $atts = array()){
                           endif;
                         endif;
                         ?>
-                        <textarea id="question-textarea<?php echo $form_index; ?>" class="question-textarea" rows="10" placeholder="<?php echo isset($placeholder[$show_form])? $placeholder[$show_form] : $placeholder["ask-question"]; ?>"></textarea>
+                        <textarea id="question-textarea<?php echo $form_index; ?>" class="question-textarea" rows="5" placeholder="<?php echo isset($placeholder[$show_form])? $placeholder[$show_form] : $placeholder["ask-question"]; ?>"></textarea>
                         <input id="file-upload<?php echo $form_index; ?>" class="file-upload" type="file" name="fileupload"/>
                         <input id="fake-text<?php echo $form_index; ?>" class="fake-text" type="text" placeholder="<?php _e('Attach file (supported type: jpg, png, pdf, doc(x), xls(x), zip).', "wp-odm_user_feedback"); ?>" />
                         <input id="fake-browse<?php echo $form_index; ?>" class="fake-browse" type="button" value="<?php _e('Browse', "wp-odm_user_feedback");?>" />
+                        <div id="process-state<?php echo $form_index; ?>" class="process-state"></div>
+                        <input id="email<?php echo $form_index; ?>" class="email" type="text" placeholder="<?php _e("Your Email (Will not be published)", "wp-odm_user_feedback");?>" />
 
                         <div id="view_upload_status<?php echo $form_index; ?>" class="view_upload_status">
                           <div class="successful_status">
@@ -71,27 +73,36 @@ function user_feedback_form_creation( $atts = array()){
                           <div id="deleted-status<?php echo $form_index; ?>" class="deleted-status"><?php _e("File was deleted", "wp-odm_user_feedback");?></div>
                           <div id="error-upload<?php echo $form_index; ?>" class="error-upload"><?php _e("ERROR!", "wp-odm_user_feedback");?></div>
                         </div>
-
-
-                        <div id="process-state<?php echo $form_index; ?>" class="process-state"></div>
-
-                        <input id="email<?php echo $form_index; ?>" class="email" type="text" placeholder="<?php _e("Your Email (Will not be published)", "wp-odm_user_feedback");?>" />
                       </div>
                       <div id="disclaimer" class="submit-resource <?php echo ($show_form != "submit-resource")? "hide" : null;?>">
                       	<p class="disclaimer-p" id="disclaimer-p<?php echo $form_index; ?>"><?php echo  __("Disclaimer: ", "wp-odm_user_feedback").$org_name." ".__("will thoroughly review all submitted resources for integrity and relevancy before the resources are hosted. All hosted resources will be in the public domain, or licensed under Creative Commons. We thank you for your support.", "wp-odm_user_feedback");?></p>
                       </div>
                       </div>
                       <div id="submit-div<?php echo $form_index; ?>" class="submit-div">
+                        <div class="recaptcha"><label><?php  _e("Please add the code:", "wp-odm_user_feedback"); ?></label>
+                        <input id="captcha_code" name="captcha_code" type="text" size="30" placeholder="<?php  _e("Code", "wp-odm_user_feedback"); ?>" autocomplete="off" />
+                        </div>
+                        <img class="recaptcha-img float-left"  src="<?php echo $_SESSION['captcha']['image_src'] ?>" alt="<?php echo $_SESSION['captcha']['code']; ?>" />
+                        <img id="refresh-icon" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/refresh.png" />
+                        <img id="refreshing-icon" src="<?php echo plugins_url("wp-odm_user_feedback") ?>/images/refreshing.gif" />
+
+                        <input id="hidden_captcha_code" type ="hidden" name="hidden_captcha_code" value="<?php echo $_SESSION['captcha']['code']; ?>" size="30" placeholder="" />
                         <input id="submit-button<?php echo $form_index; ?>" class="submit-button" type="submit" value="<?php _e("Submit", "wp-odm_user_feedback")?>"/>
-                        <div id="process-state-submit<?php echo $form_index; ?>" class="process-state-submit"></div>
-                        <span class='needed question-needed' id='question-needed<?php echo $form_index; ?>'><?php _e("* The idea box couldn't be blank!", "wp-odm_user_feedback");?></span>
-                        <span class='needed email-invalid' id='email-invalid<?php echo $form_index; ?>'><?php _e("* The email address is not valid!", "wp-odm_user_feedback");?></span>
-                        <span id="submit-error<?php echo $form_index; ?>" class="submit-error"><?php _e("Something's gone wrong, Please Resubmit the form!", "wp-odm_user_feedback");?></span>
+                          <div id="process-state-submit<?php echo $form_index; ?>" class="process-state-submit"></div>
+                        <div class="error-status">
+                          <span class='needed question-needed' id='question-needed<?php echo $form_index; ?>'><?php _e("* The idea box couldn't be blank!", "wp-odm_user_feedback");?></span>
+                          <span class='needed email-invalid' id='email-invalid<?php echo $form_index; ?>'><?php _e("* The email address is not valid!", "wp-odm_user_feedback");?></span>
+                          <span id="submit-error<?php echo $form_index; ?>" class="submit-error"><?php _e("Something's gone wrong, Please Resubmit the form!", "wp-odm_user_feedback");?></span>
+                          <span id="recaptcha-error<?php echo $form_index; ?>" class="recaptcha-error"><?php _e("Please add the code correctly​ first.", "wp-odm_user_feedback");?></span>
+                        </div>
                       </div>
                     </div>
                      </form>
                     <script type="text/javascript">
                     jQuery( "#tabs<?php echo $form_index; ?>" ).tabs();
+                    var CaptchaCallback = function() {
+                       grecaptcha.render('g-recaptcha', {'sitekey' : '6LeQbCUUAAAAAJ0XpzSjYzyQwIegS7CHAAGA6g0C'});
+                   };
                     </script>
                     </div>
     			    </div>
@@ -154,6 +165,27 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
     	$('#question-textarea<?php echo $form_index; ?>').attr('placeholder',placeholder[li_id]);
     });
 
+    $('#refresh-icon').click(function(e) {
+      $('#refresh-icon').hide();
+      $('#refreshing-icon').show();
+      jQuery.ajax({
+        type: 'POST',
+        url: hostname +'/wp-admin/admin-ajax.php',
+        dataType:"json",
+        data: {
+          action: 'Recaptcha',
+        },
+        success: function(data, textStatus, XMLHttpRequest){
+          var url = data.image_src;
+          $('#hidden_captcha_code').val( data.code);
+          $('.recaptcha-img').attr('src', url);
+          $('#refresh-icon').show();
+          $('#refreshing-icon').hide();
+        },
+        error: function(MLHttpRequest, textStatus, errorThrown){}
+        }).done(function( data ) {});
+    });
+
     $(document).keydown(function(e) {
       if(e.keyCode==27){
     		closeWindow();
@@ -172,7 +204,8 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
     function closeWindow(){
     	var overlay = $(window.parent.document.getElementById('overlay-div'));
     	$("div#user_feedback_form_fix_left").hide();
-        $("div#user_feedback_form_fix_left form").hide();
+      $("div#user_feedback_form_fix_left form").hide();
+      $('#recaptcha-error<?php echo $form_index; ?>').hide();
     	overlay.next().remove();
     	overlay.remove();
     }
@@ -182,6 +215,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
     $('#user_feedback_form-form<?php echo $form_index; ?>').submit(function(e) {
       e.preventDefault();
       $('#error-upload<?php echo $form_index; ?>').hide();
+
       if(uploadfile){
         var ext = $('input#file-upload<?php echo $form_index; ?>').val().split('.').pop().toLowerCase();
         if($.inArray(ext, ['gif','png','jpg','jpeg','pdf','doc','docx','xls','xlsx','zip','rar']) == -1) {
@@ -208,7 +242,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
         	processData:false,
         	success: function(data, textStatus, jqXHR)
         	{
-        		if(data.indexOf('img_uploaded:')){
+        		if(data.indexOf('img_uploaded:') != -1){
         			$('div#process-state<?php echo $form_index; ?>').removeClass('process-state');
         			$('div#process-state<?php echo $form_index; ?>').addClass('process-state-done');
 
@@ -233,8 +267,7 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
         			}
         	},
         	error: function(jqXHR, textStatus, errorThrown){}
-         }).done(function( data ) {
-           });
+        }).done(function( data ) { });
         uploadfile = false;
         return ;
       }
@@ -256,38 +289,45 @@ function user_feedback_form_script( $is_popup_form = true, $form_index = null, $
         }
       }
 
-    	$("input:submit").attr("disabled","disabled");
-      var active_form = ($("li.ui-state-active").length)? $("li.ui-state-active").attr("id") : "<?php echo ($show_form != "all")? $show_form : '' ?>";
 
-      jQuery.ajax({
-        type: 'POST',
-        url: hostname +'/wp-admin/admin-ajax.php',
-        data: {
-          action: 'FeedbackSubmission',
-          question_text: $("#question-textarea<?php echo $form_index; ?>").val(),
-          file_name:   $("#fake-text<?php echo $form_index; ?>").val(),
-          email: $("#email<?php echo $form_index; ?>").val(),
-          question_type:active_form
-        },
-        beforeSend: function(jqXHR, settings) {
-          $('#process-state-submit<?php echo $form_index; ?>').css({'display':'inherit'});
-        },
-        success: function(data, textStatus, XMLHttpRequest){
-          $("input:submit").removeAttr("disabled");
-          if(data.trim() == "Successful"){
-            $("#get-involve").hide();
-            $("#thanks-msg").fadeIn();
-            $("#user_feedback_form_container").children("h2").hide();
+      if($('input#hidden_captcha_code<?php echo $form_index; ?>').val() == $('input#captcha_code<?php echo $form_index; ?>').val()){
+      	$("input:submit").attr("disabled","disabled");
+        var active_form = ($("li.ui-state-active").length)? $("li.ui-state-active").attr("id") : "<?php echo ($show_form != "all")? $show_form : '' ?>";
+
+        jQuery.ajax({
+          type: 'POST',
+          url: hostname +'/wp-admin/admin-ajax.php',
+          data: {
+            action: 'FeedbackSubmission',
+            question_text: $("#question-textarea<?php echo $form_index; ?>").val(),
+            file_name:   $("#fake-text<?php echo $form_index; ?>").val(),
+            email: $("#email<?php echo $form_index; ?>").val(),
+            captcha: $("#captcha_code<?php echo $form_index; ?>").val(),
+            question_type:active_form
+          },
+          beforeSend: function(jqXHR, settings) {
+            $('#process-state-submit<?php echo $form_index; ?>').css({'display':'inherit'});
+          },
+          success: function(data, textStatus, XMLHttpRequest){
+            $("input:submit").removeAttr("disabled");
+            if(data.trim() == "Successful"){
+              $("#get-involve").hide();
+              $("#thanks-msg").fadeIn();
+              $("#user_feedback_form_container").children("h2").hide();
+              $('#process-state-submit<?php echo $form_index; ?>').hide();
+            }else {
+                $('#submit-error<?php echo $form_index; ?>').show();
+                return ;
+            }
+          },
+          error: function(MLHttpRequest, textStatus, errorThrown){
             $('#process-state-submit<?php echo $form_index; ?>').hide();
-          }else {
-              $('#submit-error<?php echo $form_index; ?>').show();
-              return ;
+            $('#submit-error<?php echo $form_index; ?>').show();
           }
-        },
-        error: function(MLHttpRequest, textStatus, errorThrown){
-          $('#submit-error<?php echo $form_index; ?>').show();
-        }
-      }).done(function( data ) {});
+        }).done(function( data ) {});
+      }else{
+          $('#recaptcha-error<?php echo $form_index; ?>').show();
+      }
     });
 
 

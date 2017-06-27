@@ -1,19 +1,27 @@
 <?php
-  require_once('layout/form.php');
-
-  /**
+/**
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
-   * Description: The plugin that let's user to have feedback to ODC
-   * Version: 2.1.8
+   * Description: Wordpress plugin offering different forms for users to contact site admins
+   * Version: 2.1.9
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
    */
 
+  require_once('layout/form.php');
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
+  include_once plugin_dir_path(__FILE__).'vendor/abeautifulsite/simple-php-captcha/simple-php-captcha.php';
 
+  session_start();
+  $_SESSION = array();
+
+  $_SESSION['captcha'] = simple_php_captcha(array(
+    'min_font_size' => 25,
+    'max_font_size' => 25,
+    'color' => '#333'
+  ));
   $GLOBALS['user_feedback_options'] = new UserFeedback_Options();
 
  if (!class_exists('Odm_User_Feedback_Plugin')) :
@@ -39,6 +47,8 @@
           add_action("wp_ajax_UploadFeedbackFile", array($this, 'UploadFeedbackFile'));
           add_action("wp_ajax_nopriv_DeleteUploadedFile", array($this, 'DeleteUploadedFile'));
           add_action("wp_ajax_DeleteUploadedFile", array($this, 'DeleteUploadedFile'));
+          add_action("wp_ajax_nopriv_Recaptcha", array($this, 'Recaptcha'));
+          add_action("wp_ajax_Recaptcha", array($this, 'Recaptcha'));
           add_action("user_feedback_form", array($this, 'user_feedback_form_shortcode_function'));
  		    }
 
@@ -66,8 +76,10 @@
 
         public function add_script(){
         	wp_enqueue_style("user_feedback_form_buttoncss", plugins_url("wp-odm_user_feedback")."/style/button.css");
-        	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'));
+        	wp_register_script('user_feedback_form_buttonjs',plugins_url("wp-odm_user_feedback").'/js/button.js', array('jquery'), 'v1.0.1');
           wp_enqueue_script('user_feedback_form_buttonjs');
+          wp_enqueue_script("recaptcha_js", "https://www.google.com/recaptcha/api.js", array(), '2.0.0');
+          wp_enqueue_script('recaptcha_js');
         	}
 
         public function enqueue_custom_admin_style() {
@@ -93,9 +105,11 @@
         	if(empty($email_sender)){
         		$email_sender = "Anonymous user";
         	}
+
         	$desc = $request["question_text"];
         	$type = $request["question_type"];
         	$file_name = $request["file_name"];
+
           $insert = $wpdb->insert($feedback_table,
             	array(
             		'email'=> $email_sender,
@@ -155,6 +169,16 @@
         	$filename = basename($new_destination_name);
         	echo('img_uploaded:'.$filename);
         	die();
+        }
+
+        public function Recaptcha(){
+          $recaptcha = simple_php_captcha(array(
+          	'min_font_size' => 25,
+          	'max_font_size' => 25,
+          	'color' => '#333'
+          ));
+          echo json_encode($recaptcha );
+          exit();
         }
 
         public function user_feedback_form_menu(){

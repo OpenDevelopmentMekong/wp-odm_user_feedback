@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-04-24 09:43+0700\n"
-"PO-Revision-Date: 2017-04-24 09:43+0700\n"
+"POT-Creation-Date: 2017-06-26 16:23+0700\n"
+"PO-Revision-Date: 2017-06-26 16:23+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:50
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:68
 msgid "Contact us"
 msgstr ""
 
@@ -47,46 +47,66 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: ../layout/form.php:68
-msgid "View"
-msgstr ""
-
-#: ../layout/form.php:69
-msgid "Delete"
-msgstr ""
-
-#: ../layout/form.php:71
-msgid "File was deleted"
-msgstr ""
-
-#: ../layout/form.php:72
-msgid "ERROR!"
-msgstr ""
-
-#: ../layout/form.php:78
+#: ../layout/form.php:66
 msgid "Your Email (Will not be published)"
 msgstr ""
 
-#: ../layout/form.php:85
+#: ../layout/form.php:70
+msgid "View"
+msgstr ""
+
+#: ../layout/form.php:71
+msgid "Delete"
+msgstr ""
+
+#: ../layout/form.php:73
+msgid "File was deleted"
+msgstr ""
+
+#: ../layout/form.php:74
+msgid "ERROR!"
+msgstr ""
+
+#: ../layout/form.php:82
+msgid "Please add the code:"
+msgstr ""
+
+#: ../layout/form.php:83
+msgid "Code"
+msgstr ""
+
+#: ../layout/form.php:90
 msgid "Submit"
 msgstr ""
 
-#: ../layout/form.php:87
+#: ../layout/form.php:93
 msgid "* The idea box couldn't be blank!"
 msgstr ""
 
-#: ../layout/form.php:88
+#: ../layout/form.php:94
 msgid "* The email address is not valid!"
 msgstr ""
 
-#: ../layout/form.php:89
+#: ../layout/form.php:95
 msgid "Something's gone wrong, Please Resubmit the form!"
 msgstr ""
 
-#: ../layout/form.php:98
+#: ../layout/form.php:96
+msgid "Please add the code correctly​ first."
+msgstr ""
+
+#: ../layout/form.php:112
 msgid "Thank you for taking the time to get in contact!"
 msgstr ""
 
-#: ../wp-odm_user_feedback.php:263
+#: ../templates/settings.php:13
+msgid "Additional emails"
+msgstr ""
+
+#: ../templates/settings.php:16
+msgid "Specify a comma-separated list of email addresses to send emails to"
+msgstr ""
+
+#: ../wp-odm_user_feedback.php:295
 msgid "Unable to delete file!"
 msgstr ""
