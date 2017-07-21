@@ -3,16 +3,16 @@
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
    * Description: Wordpress plugin offering different forms for users to contact site admins
-   * Version: 2.1.9
+   * Version: 2.1.10
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
    */
-
+   
+  require 'vendor/autoload.php';
   require_once('layout/form.php');
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
-  include_once plugin_dir_path(__FILE__).'vendor/abeautifulsite/simple-php-captcha/simple-php-captcha.php';
 
   session_start();
   $_SESSION = array();
