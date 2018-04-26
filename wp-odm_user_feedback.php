@@ -9,10 +9,10 @@
    * Author URI: http://www.opendevelopmentcambodia.net/
    */
 
+  require plugin_dir_path(__FILE__).'vendor/autoload.php';
   require_once('layout/form.php');
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-options.php';
   include_once plugin_dir_path(__FILE__).'utils/user_feedback-utils.php';
-  include_once plugin_dir_path(__FILE__).'vendor/abeautifulsite/simple-php-captcha/simple-php-captcha.php';
 
   session_start();
   $_SESSION = array();
