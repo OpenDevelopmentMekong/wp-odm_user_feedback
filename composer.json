@@ -8,6 +8,6 @@
         }
     ],
     "require": {
-      "abeautifulsite/simple-php-captcha": "*"
+      "abeautifulsite/simple-php-captcha": "1.0.1"
     }
 }
