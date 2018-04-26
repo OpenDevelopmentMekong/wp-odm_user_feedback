@@ -73,3 +73,17 @@
 	cursor: pointer;
 	color: #0096dd;
 }
+#user_feedback_dashboard_widget{
+		width: 100%;
+		max-height: 250px;
+		clear: both;
+		overflow: auto;
+}
+
+#user_feedback_dashboard_widget table.fixed{
+	table-layout: inherit;
+}
+
+#user_feedback_dashboard_widget  .inside h2{
+	display: none;
+}
