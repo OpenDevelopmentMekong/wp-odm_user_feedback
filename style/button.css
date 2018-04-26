@@ -29,7 +29,9 @@ div#wrap-feedback.wrap-feedback_fix_left{
 	position: relative;
 	bottom: -90px;
 }
-
+#feedback-button:hover{
+	cursor: pointer;
+}
 a#user_feedback_form{
 	color:#fff;
 	width: 105px;
