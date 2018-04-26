@@ -217,6 +217,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 	</div>
 </form>
 
+<div class="clear"></div>
 </div>
 <script type="text/javascript">
 	jQuery(document).ready(function($){

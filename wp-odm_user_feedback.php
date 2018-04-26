@@ -3,7 +3,7 @@
    * Plugin Name: User Feedback Form
    * Plugin URI: http://www.opendevelopmentcambodia.net/
    * Description: Wordpress plugin offering different forms for users to contact site admins
-   * Version: 2.1.10
+   * Version: 2.2.0
    * Author: ODC IT team (HENG Huy Eng & HENG Cham Roeun)
    * Forked from: userfeedback (By Mr. HENG Cham Roeun)
    * Author URI: http://www.opendevelopmentcambodia.net/
@@ -50,8 +50,26 @@
           add_action("wp_ajax_nopriv_Recaptcha", array($this, 'Recaptcha'));
           add_action("wp_ajax_Recaptcha", array($this, 'Recaptcha'));
           add_action("user_feedback_form", array($this, 'user_feedback_form_shortcode_function'));
+          add_action("wp_dashboard_setup", array($this, 'user_feedback_add_dashboard_widgets'));
  		    }
+        public function user_feedback_add_dashboard_widgets() {
+         	wp_add_dashboard_widget( 'user_feedback_dashboard_widget', 'User Contact/Feedback',  array($this, 'user_feedback_form_option_content') );
 
+         	// Globalize the metaboxes array, this holds all the widgets for wp-admin
+
+         	global $wp_meta_boxes;
+         	$normal_dashboard = $wp_meta_boxes['dashboard']['normal']['core'];
+         	$temp_widget_backup = array( 'user_feedback_dashboard_widget' => $normal_dashboard['user_feedback_dashboard_widget'] );
+         	unset( $normal_dashboard['user_feedback_dashboard_widget'] );
+
+         	// Merge the two arrays together so our widget is at the beginning
+
+         	$sorted_dashboard = array_merge( $temp_widget_backup, $normal_dashboard );
+
+         	// Save the sorted array back into the original metaboxes
+
+         	$wp_meta_boxes['dashboard']['normal']['core'] = $sorted_dashboard;
+        }
         public function user_feedback_form_shortcode_function(){
             $arg = array('is_popup_form'=>false, 'no_tab'=>1);
             return user_feedback_form_creation($arg);
