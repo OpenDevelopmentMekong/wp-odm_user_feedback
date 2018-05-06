@@ -1,112 +1,115 @@
+# Translators:
+# Maniphet Phengsavatdy <m.phengsavatdy@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-06-26 16:23+0700\n"
-"PO-Revision-Date: 2017-06-26 16:23+0700\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: en\n"
+"POT-Creation-Date: 2018-05-06 15:56+0700\n"
+"PO-Revision-Date: 2018-05-06 15:59+0700\n"
+"Last-Translator: Maniphet Phengsavatdy <m.phengsavatdy@gmail.com>, 2018\n"
+"Language-Team: Lao (https://www.transifex.com/open-development-mekong/"
+"teams/27158/lo/)\n"
+"Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 2.0.1\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: _e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:68
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:87
 msgid "Contact us"
-msgstr ""
+msgstr "ຕິດຕໍ່ພວກເຮົາ"
 
 #: ../layout/form.php:35
 msgid "Ask Question"
-msgstr ""
+msgstr "ຖາມຄຳຖາມ"
 
 #: ../layout/form.php:36
 msgid "Report Problem"
-msgstr ""
+msgstr "ແຈ້ງບັນຫາ"
 
 #: ../layout/form.php:37
 msgid "Share Idea"
-msgstr ""
+msgstr "ແລກປ່ຽນຄວາມຄິດ"
 
 #: ../layout/form.php:38
 msgid "Send Feedback"
-msgstr ""
+msgstr "ສົ່ງຄຳເຫັນ"
 
 #: ../layout/form.php:39
 msgid "Submit Resources"
-msgstr ""
+msgstr "ສົ່ງຂໍ້ມູນ"
 
 #: ../layout/form.php:63
 msgid "Attach file (supported type: jpg, png, pdf, doc(x), xls(x), zip)."
-msgstr ""
+msgstr "ຕິດຄັດເອກະສານ (ປະເພດເອກະສານ: jpg, png, pdf, doc(x), xls(x), zip)"
 
 #: ../layout/form.php:64
 msgid "Browse"
-msgstr ""
+msgstr "ຄົ້ນຫາ"
 
 #: ../layout/form.php:66
 msgid "Your Email (Will not be published)"
-msgstr ""
+msgstr "ອີເມລຂອງທ່ານ (ຈະບໍ່ຖືກເປີດເຜີຍ)"
 
 #: ../layout/form.php:70
 msgid "View"
-msgstr ""
+msgstr "ເບິ່ງ"
 
 #: ../layout/form.php:71
 msgid "Delete"
-msgstr ""
+msgstr "ລຶບ"
 
 #: ../layout/form.php:73
 msgid "File was deleted"
-msgstr ""
+msgstr "ເອກະສານຖືກລຶບແລ້ວ"
 
 #: ../layout/form.php:74
 msgid "ERROR!"
-msgstr ""
+msgstr "ຜິດພາດ!"
 
 #: ../layout/form.php:82
 msgid "Please add the code:"
-msgstr ""
+msgstr "ກະລຸນາເພີ່ມລະຫັດ:"
 
 #: ../layout/form.php:83
 msgid "Code"
-msgstr ""
+msgstr "ລະຫັດ"
 
 #: ../layout/form.php:90
 msgid "Submit"
-msgstr ""
+msgstr "ສົ່ງ"
 
 #: ../layout/form.php:93
 msgid "* The idea box couldn't be blank!"
-msgstr ""
+msgstr "* ກ່ອງສະແດງຄວາມຄິດເຫັນບໍ່ສາມາດຖືກປະໃຫ້ວ່າງເປົ່າໄດ້! "
 
 #: ../layout/form.php:94
 msgid "* The email address is not valid!"
-msgstr ""
+msgstr "* ອີເມລບໍ່ຖືກຕ້ອງ!"
 
 #: ../layout/form.php:95
 msgid "Something's gone wrong, Please Resubmit the form!"
-msgstr ""
+msgstr "ມີບາງຢ່າງຜິດພາດ, ກະລຸນາສົ່ງຟອມໃໝ່!"
 
 #: ../layout/form.php:96
 msgid "Please add the code correctly​ first."
-msgstr ""
+msgstr "ກະລຸນາເພີ່ມລະຫັດກ່ອນຫນ້າທໍາອິດ."
 
 #: ../layout/form.php:112
 msgid "Thank you for taking the time to get in contact!"
-msgstr ""
+msgstr "ຂອບໃຈທີ່ເສຍສະຫຼະເວລາຕິດຕໍ່ພວກເຮົາ! "
 
 #: ../templates/settings.php:13
 msgid "Additional emails"
-msgstr ""
+msgstr "ອີເມວເພີ່ມເຕີມ"
 
 #: ../templates/settings.php:16
 msgid "Specify a comma-separated list of email addresses to send emails to"
 msgstr ""
 
-#: ../wp-odm_user_feedback.php:295
+#: ../wp-odm_user_feedback.php:314
 msgid "Unable to delete file!"
-msgstr ""
+msgstr "ບໍ່ສາມາດລຶບເອກະສານໄດ້!"
