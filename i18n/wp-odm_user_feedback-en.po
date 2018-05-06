@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-06-26 16:23+0700\n"
-"PO-Revision-Date: 2017-06-26 16:23+0700\n"
+"POT-Creation-Date: 2018-05-06 16:02+0700\n"
+"PO-Revision-Date: 2018-05-06 16:02+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _e\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../layout/form.php:26 ../wp-odm_user_feedback.php:68
+#: ../layout/form.php:26 ../wp-odm_user_feedback.php:87
 msgid "Contact us"
 msgstr ""
 
@@ -107,6 +107,6 @@ msgstr ""
 msgid "Specify a comma-separated list of email addresses to send emails to"
 msgstr ""
 
-#: ../wp-odm_user_feedback.php:295
+#: ../wp-odm_user_feedback.php:314
 msgid "Unable to delete file!"
 msgstr ""
