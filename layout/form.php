@@ -63,6 +63,7 @@ function user_feedback_form_creation( $atts = array()){
                         <input id="fake-text<?php echo $form_index; ?>" class="fake-text" type="text" placeholder="<?php _e('Attach file (supported type: jpg, png, pdf, doc(x), xls(x), zip).', "wp-odm_user_feedback"); ?>" />
                         <input id="fake-browse<?php echo $form_index; ?>" class="fake-browse" type="button" value="<?php _e('Browse', "wp-odm_user_feedback");?>" />
                         <div id="process-state<?php echo $form_index; ?>" class="process-state"></div>
+                        <label class="clear-both font-weight-normal" for="email<?php echo $form_index; ?>"><?php _e("We will contact you back if your email address is provided.", "wp-odm_user_feedback");?></label>
                         <input id="email<?php echo $form_index; ?>" class="email" type="text" placeholder="<?php _e("Your Email (Will not be published)", "wp-odm_user_feedback");?>" />
 
                         <div id="view_upload_status<?php echo $form_index; ?>" class="view_upload_status">
