@@ -152,7 +152,7 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
 						if($result_row->file_upload){
 							$path_info = pathinfo($result_row->file_upload);
 							$extension = $path_info['extension'];
-							$attached_link = $uploads_dir['baseurl'].'/user_feedback_form/'.$result_row->file_upload;
+							$attached_link = $uploads_dir['baseurl'].'/wp-odm_user_feedback/'.$result_row->file_upload;
 	            $file_upload = "<a target='_blank' href='".$attached_link."'>".strtoupper($extension)." attached</a>";
 						}
 						$date = date_format(date_create($result_row->date_submitted),'M d, Y');
