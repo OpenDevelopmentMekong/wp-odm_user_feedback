@@ -139,19 +139,22 @@ if ( !current_user_can( 'edit_others_posts' ) )  {
             </tr>
         </thead>
         <tbody>
-          <?php foreach($result_set as $result_row){
+          <?php
+        foreach($result_set as $result_row){
             $id = $result_row->id;
             $email = $result_row->email;
             $description = $result_row->description;
             $type = ucwords(str_replace('-',' ', $result_row->type));
-            $icon = plugins_url("wp-odm_user_feedback")."/style/images/".$icon_options[$result_row->type];
-
+            $icon = '';
+            if (isset($icon_options[$result_row->type])) {
+                $icon = plugins_url("wp-odm_user_feedback")."/style/images/".$icon_options[$result_row->type];
+            }
 
             $uploads_dir = wp_upload_dir();
             $file_upload = null;
             if($result_row->file_upload){
                 $path_info = pathinfo($result_row->file_upload);
-                $extension = $path_info['extension'];
+                $extension = isset($path_info['extension']) ? $path_info['extension'] : '';
                 $attached_link = $uploads_dir['baseurl'].'/user_feedback_form/'.$result_row->file_upload;
                 $file_upload = "<a target='_blank' href='".$attached_link."'>".strtoupper($extension)." attached</a>";
             }
