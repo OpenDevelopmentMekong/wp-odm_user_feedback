@@ -2,7 +2,7 @@
     <h2>User feedback settings</h2>
     <form method="post" action="options.php">
         <?php @settings_fields('user_feedback-group'); ?>
-        <?php @do_settings_fields('user_feedback-group'); ?>
+        <?php @do_settings_fields('wp_user_feedback', 'user_feedback-group'); ?>
 
         <?php
           $additional_emails = $GLOBALS['user_feedback_options']->get_option('user_feedback_additional_emails');
